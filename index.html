@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!--HEAD-->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width" />
+        <title>Victoria McCabe Portfolio</title>
+        <link rel="stylesheet" type="text/css" href="stylesheet/portfolio.css">
+    </head>
+
+    <!--BODY-->
+    <body class="Background">
+        
+        <!--NAVBAR-->
+        <div class="Navbar">
+            <a class="active" href="#Home">Home</a>
+            <a href="#About">About</a>
+            <a href="#GitHub">GitHub</a>
+            <a href="#Contact">Contact</a>
+        </div>
+
+        
+        <br>
+        <br>
+
+        <!--BACKGROUND VIDEO-->
+        <div id="Home">
+            <video autoplay muted loop id="Tree_Video">
+                <source src="images/video/tree.mp4" type="video/mp4">
+                <!--Display message if video fails to run-->
+                Your browser does not support HTML5 video.
+            </video>
+        </div>
+
+        <!--VIDEO TEXT-->
+        <div class="Video_Text">
+            <h1 class="white-text">Victoria McCabe Portfolio</h1>
+            <strong>
+                <p class="quote-center">
+                    <q>It’s not about ideas. It’s about making ideas happen.</q>
+                    <br>
+                        - Scott Belsky
+                    <br>
+                    <br> My name is Victoria McCabe. Welcome to my portfolio website. On it, I will tell you about my background and experience.
+                    <br> Thank you for stopping by and enjoy! 
+                </p>
+            </strong>
+        </div>
+
+        </div>
+               <!--ABOUT-->
+               <div class="Row" id="About">
+                <!--Left column-->
+                <div class="Column_2">
+                    <img src="images/Victoria-McCabe.png" alt="Replace with your own image and description" class="victoria-image">
+                </div>
+
+                <div class="Column_1">
+                    <h1>About</h1>
+                    <p class="p-about">
+                        I’m a software developer, proudly graduated from <a href="https://www.learncodinganywhere.com" target="_blank">The Tech Academy</a>’s Software Developer Boot Camp with a true love for coding and tackling new challenges.
+                        <br>
+                        <br>Originally from Argentina, technology has always been a huge part of my life. Before diving into software development, I worked as an EMT, where I learned how to stay calm and think quickly under pressure.
+                        <br>
+                        <br>
+                        A little while ago, my husband Duncan and I decided we were ready for a change. We both wanted to pursue something that truly excited us, so we took the leap into software development. It’s been an amazing journey so far, and I’m excited to continue growing, learning, and working on meaningful projects.
+                        <br>
+                        <br>
+                        I’m trained and experienced in the following web and programming languages: HTML, CSS, JavaScript, SQL, C#, and more. This website showcases some of my work, where I share the projects I’ve created for people and companies to see. Feel free to explore and reach out if you’re interested in collaborating!
+                       
+                    </p>
+                </div>
+            </div>
+    
+            <!--GITHUB-->
+            <div class="Row" id="GitHub">
+                <!--Left column-->
+                <div class="Column_1">
+                    <h1>GitHub</h1>
+                    <p>
+                        You can view my coding projects on my GitHub profile here:
+                        <br>
+                        <p class="center"><a href="https://github.com/victoriamccabe" target="_blank">Victoria McCabe GitHub</a></p>
+                    </p>
+                </div>
+
+                <div class="Column_2">
+                    <a href="https://github.com/victoriamccabe" target="_blank"><img src="images/git-hub.png" alt="GitHub Logo"></a>
+                </div>
+            </div>
+    
+            <!--CONTACT-->
+            <div class="Row" id="Contact">
+
+                <div class="Column_2 Column_tall">
+                    <video autoplay muted loop src="images/video/typing-video.mp4" type="video/mp4" class="typing-video">
+                </div>
+
+                <div class="Column_1 Column_tall">
+                    <h1>Contact</h1>
+                    <form action="" method="POST"> <!-- Here we are utilizing a 3rd party service to submit the contact form data, insert your formspree endpoint in the action attribute -->
+                        <div class="label-text">
+                        <label>Name:</label>
+                            <input type="text" placeholder="Please enter your name here">
+                        <label>Email:</label>
+                            <input type="text" id="Email" name="Email" placeholder="Please enter your email here">
+                        <label>Message:</label>
+                            <input type="text" id="Message" name="Message" placeholder="Please write your message here">
+                            <input type="submit" value="SUBMIT">
+                        </div>
+                    </form>
+                </div>
+            </div>
+    
+            <!--FOOTER-->
+            <footer>
+                <p>
+                    <p class="center">&copy Prosper Consulting Inc., <a href="https://www.learncodinganywhere.com/" target="_blank">The Tech Academy</a></p>
+                    <br>
+                </p>
+            </footer>
+        </body>
+    </html>
