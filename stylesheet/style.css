@@ -110,29 +110,6 @@ img:hover {
     transform: scale(1.1);
 }
 
-/*TYPING VIDEO*/
-.typing-video {
-    filter: grayscale(20%);
-    border-radius: 20px;
-    /* You can adjust the value here for more/less rounding */
-    width: 25vw;
-    height: 340px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 40px;
-    object-fit: cover;
-    /* Ensures video content fits well within the rounded corners */
-}
-
-.typing-video:hover {
-    filter: grayscale(5%);
-    transition: transform 1s;
-    transform: scale(1.1);
-}
-
-
-
 
 footer {
 
@@ -212,10 +189,11 @@ footer {
 #loop_Video {
     position: fixed;
     top: 0;
-    right: 0;
-    bottom: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
     z-index: -1;
+    object-fit: cover; /* Ensures the video covers the entire area without distortion */
 }
 
 
@@ -293,7 +271,7 @@ footer {
 /* This class is applied to the columns in the final row, overriding the height and padding to provide more room for the contact form  while keeping the rest of the formatting from Column_1 or Column_2 */
 .Column_tall {
     height: 450px;
-    padding: 10px;
+    padding: 500px;
 }
 
 /* This inserts something after the content of selected elements (in this case the elements with class "Row") */
@@ -631,7 +609,9 @@ label{
 
 /* Media rules for screens 576px and smaller */
 @media screen and (max-width: 576px) {
-    .Column_1 {
+    .Column_1, .Column_2 {
+        width: 100%;
+        height: auto;
         overflow: auto;
     }
 
@@ -661,12 +641,60 @@ label{
         font-size: 6vw;
     }
 
-    .Column_2 {
-        height: auto;
-        padding: 5px;
+    #Slideshow_Container {
+        width: 90%;
+        max-width: 100%;
     }
 
+    .Slideshow_Images {
+        height: auto;
+        width: 100%;
+    }
+}
 
+/* Media rules for screens between 577px and 1080px *//* General styling for columns */
+.Column_1, .Column_2 {
+    height: 510px; /* Increased by 10px */
+}
+
+/* Media rules for screens 576px and smaller */
+@media screen and (max-width: 576px) {
+    .Column_1, .Column_2 {
+        width: 100%;
+        height: auto;
+        overflow: auto;
+    }
+
+    img {
+        height: 20vw;
+        margin-top: 15vw;
+    }
+
+    #loop_Video {
+        display: none;
+    }
+
+    .Navbar a {
+        width: 25%;
+        font-size: 3vw;
+    }
+
+    p {
+        font-size: 4vw;
+    }
+
+    .quote {
+        font-size: 5vw;
+    }
+
+    .white-text {
+        font-size: 6vw;
+    }
+
+    #Slideshow_Container {
+        width: 90%;
+        max-width: 100%;
+    }
 
     .Slideshow_Images {
         height: auto;
@@ -676,6 +704,12 @@ label{
 
 /* Media rules for screens between 577px and 1080px */
 @media screen and (min-width: 577px) and (max-width: 1080px) {
+    .Column_1, .Column_2 {
+        width: 100%;
+        height: auto;
+        overflow: auto;
+    }
+
     .Navbar a {
         width: 20%;
         font-size: 2.5vw;
@@ -693,12 +727,10 @@ label{
         font-size: 4vw;
     }
 
-    .Column_2 {
-        height: auto;
-        padding: 10px;
+    #Slideshow_Container {
+        width: 80%;
+        max-width: 600px;
     }
-
-  
 
     .Slideshow_Images {
         height: auto;
@@ -708,6 +740,12 @@ label{
 
 /* Media rules for screens between 1081px and 1535px */
 @media screen and (min-width: 1081px) and (max-width: 1535px) {
+    .Column_1, .Column_2 {
+        width: 50%;
+        height: auto;
+        overflow: auto;
+    }
+
     .Navbar a {
         width: 15%;
         font-size: 1.5vw;
@@ -725,12 +763,11 @@ label{
         font-size: 3vw;
     }
 
-    .Column_2 {
-        height: auto;
-        padding: 15px;
+    #Slideshow_Container {
+        width: 70%;
+        max-width: 600px;
     }
 
- 
     .Slideshow_Images {
         height: auto;
         width: 100%;
@@ -739,6 +776,12 @@ label{
 
 /* Media rules for screens between 1536px and 2269px */
 @media screen and (min-width: 1536px) and (max-width: 2269px) {
+    .Column_1, .Column_2 {
+        width: 50%;
+        height: auto;
+        overflow: auto;
+    }
+
     .Navbar a {
         width: 10%;
         font-size: 1.2vw;
@@ -756,12 +799,10 @@ label{
         font-size: 2.5vw;
     }
 
-    .Column_2 {
-        height: auto;
-        padding: 20px;
+    #Slideshow_Container {
+        width: 60%;
+        max-width: 600px;
     }
-
-  
 
     .Slideshow_Images {
         height: auto;
@@ -771,6 +812,12 @@ label{
 
 /* Media rules for screens 2270px and larger */
 @media screen and (min-width: 2270px) {
+    .Column_1, .Column_2 {
+        width: 50%;
+        height: auto;
+        overflow: auto;
+    }
+
     .Navbar a {
         width: 8%;
         font-size: 1vw;
@@ -788,12 +835,11 @@ label{
         font-size: 2vw;
     }
 
-    .Column_2 {
-        height: auto;
-        padding: 25px;
+    #Slideshow_Container {
+        width: 50%;
+        max-width: 600px;
     }
 
-    
     .Slideshow_Images {
         height: auto;
         width: 100%;
@@ -802,9 +848,9 @@ label{
 
 /* Media rules to increase the size of the columns for larger screens (1725px and above) */
 @media screen and (min-width: 1725px) {
-    .Column_1,
-    .Column_2 {
-        height: 550px;
+    .Column_1, .Column_2 {
+        height: 750px; 
+        overflow: auto;
     }
 }
 
@@ -813,4 +859,6 @@ label{
     h1 {
         margin-top: 0;
     }
+
+
 }
