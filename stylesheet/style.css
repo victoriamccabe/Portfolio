@@ -384,7 +384,7 @@ footer {
     /* This gives slight spacing between the letters */
     font-size: 1vw;
     /* Font size is relative to the size of the viewport width */
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: #3B3A43;
     /* Gives a slightly transparent black background */
     font-weight: bold;
     border-radius: 0px 0px 7px 7px;
@@ -415,7 +415,7 @@ footer {
 /* Hover effect for slideshow dots */
 .active,
 .dot:hover {
-    background-color: black;
+    background-color: #3B3A43;
     /* Sets the color of the dots when active or hovered over */
 }
 
