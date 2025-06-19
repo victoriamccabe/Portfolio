@@ -5,7 +5,7 @@ Welcome to my GitHub repository! This is where I showcase my work as a software 
 The purpose of this repository is to share my coding journey and demonstrate the skills I've acquired. I will be updating this repository regularly with new projects.
 
 Feel free to explore the projects, and if you're interested in collaborating or have any feedback don't hesitate to reach out!
-- Email: [Send me a message!](mailto:victoriamccabe96@gmail.com)
+- Email: victoriamccabe96@gmail.com
 - LinkedIn: [Victoria McCabe](https://www.linkedin.com/in/victoria-mccabe-9a3bb926b/)
 - GitHub: [My GitHub](https://github.com/victoriamccabe)
 ## Projects
