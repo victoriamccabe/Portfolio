@@ -161,7 +161,7 @@
         padding: 0.6rem;
         height: 31.9rem;
     }
-    .Column_1 { background-color: #D6C1BF; }
+    .Column_1 { background-color: #baafb2; }
     .Column_2 {
         background-color: rgba( 89, 83, 90, 0.318);
         display: flex;
@@ -171,7 +171,7 @@
     }
     .Column_tall { height: 28.1rem; padding: 31.2rem; }
     .Row:after { content: ""; display: table; clear: both; }
-    .Github-override-left { background-color: rgba(127, 145, 138, 0.952); }
+    .Github-override-left { background-color: rgb(107, 118, 110); }
     .Column-title { font-size: 2.4rem; }
 
     #Slideshow_Background { display: block; }
@@ -255,7 +255,7 @@
         right: 1.2rem;
         width: 24rem;
         height: 6rem;
-        background-color: rgba(127, 145, 138, 0.952);
+        background-color: rgb(107, 118, 110);
         color: #fff;
         border: solid #fff;
         cursor: pointer;
