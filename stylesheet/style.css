@@ -125,6 +125,7 @@ footer {
     margin-bottom: 5px;
     background-color: rgba(119, 133, 122, 0.3);
     color: #06050A;
+    text-shadow: #fff 0.1vw 0.1vw 0.2vw;
     outline: 4px solid #3B3A43;
     padding: 2vw;
     position: relative;
