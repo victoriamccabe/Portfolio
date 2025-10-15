@@ -189,9 +189,11 @@
     .Slideshow_Images {
         vertical-align: middle;
         height: auto;
-        box-shadow: 0px 5px 10px 12px rgba(59, 58, 67, 0.5);
+        box-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.5);
         width: 100%;
         max-width: 100%;
+        filter: grayscale(10%) brightness(90%) contrast(90%) saturate(90%);
+        
     }
     .Previous, .Next {
         cursor: pointer;
