@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Victoria McCabe Portfolio</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet/style.css">
+</head>
+<body class="Background">
+
+    <!-- === NAVBAR === -->
+    <div class="Navbar">
+        <a class="active" href="#Home">Home</a>
+        <a href="#About">About</a>
+        <a href="#GitHub">GitHub</a>
+        <a href="#Contact">Contact</a>
+    </div>
+
+    <!-- === BACKGROUND VIDEO === -->
+    <div id="Home">
+        <video autoplay muted loop id="loop_Video">
+            <source src="images/video/loop.mp4" type="video/mp4">
+            <!-- Fallback message for unsupported browsers -->
+            Your browser does not support HTML5 video.
+        </video>
+    </div>
+
+    <!-- === INTRO TEXT === -->
+    <div class="Drop_Text">
+    <h1 class="white-text">Victoria McCabe Portfolio</h1>
+    <strong>
+        <p class="quote-center">
+            <q>It’s not about ideas. It’s about making ideas happen.</q><br>
+            - Scott Belsky
+        </p>
+        <p class="Drop_Text" id="title-description">
+            I’m Victoria McCabe, a junior software developer who loves turning ideas into clean, user-friendly web applications. I solve problems quickly, embrace AI tools to work smarter, and focus on creating solutions that look great and are simple to use. Check out my portfolio to see how I make projects both functional and appealing. <br>Let’s connect!
+        </p>
+    </strong>
+</div>
+
+    <!-- === ABOUT SECTION === -->
+    <div class="Row" id="About">
+        <!-- Slideshow Column -->
+        <div class="Column_2">
+            <div id="Slideshow_Container">
+                <!-- Slides -->
+                <div class="mySlides fade">
+                    <img class="Slideshow_Images" src="images/Victoria-McCabe.png" alt="Victoria McCabe">
+                    <div class="text">I'm available to assist you on your project!</div>
+                </div>
+                <div class="mySlides fade">
+                    <a href="https://github.com/victoriamccabe" target="_blank">
+                        <img class="Slideshow_Images" src="images/HTML_CSS_and_JavaScript.jpg" alt="HTML, CSS, and JS logos">
+                        <div class="text">I am a full-stack software developer,<br>trained in:<br>HTML, CSS, JavaScript,</div>
+                    </a>
+                </div>
+                <div class="mySlides fade">
+                    <a href="https://github.com/victoriamccabe/Python-Projects" target="_blank">
+                        <img class="Slideshow_Images" src="images/Python.jpg" alt="Python logo">
+                        <div class="text">the popular programming language Python,</div>
+                    </a>
+                </div>
+                <div class="mySlides fade">
+                    <a href="https://github.com/victoriamccabe/C-Sharp-Projects" target="_blank"></a>
+                    <img class="Slideshow_Images" src="images/C_Sharp_and_Dot_NET.png" alt="C# logo">
+                    <div class="text">C#, .NET Framework, ASP.NET, MVC,</div>
+                </div>
+                <div class="mySlides fade">
+                    <a href="https://github.com/victoriamccabe/Python-Projects" target="_blank"></a>
+                    <img class="Slideshow_Images" src="images/SQL_and_Database.png" alt="SQL logo">
+                    <div class="text">back end development, databases and SQL.</div>
+                </div>
+                <!-- Slideshow Controls -->
+                <a class="Previous" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="Next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+            <!-- Slideshow Dots -->
+            <div style="text-align: center">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+                <span class="dot" onclick="currentSlide(5)"></span>
+            </div>
+        </div>
+
+        <!-- About Text Column -->
+        <div class="Column_1">
+            <h1 class="Column-title">About</h1><br>
+            <section id="about">
+    <p class="p-about">
+        I’m passionate about building web apps that not only work but delight users. My approach is simple: understand what the client wants, solve problems efficiently, and focus on usability and design.  
+    </p>
+    <p class="p-about">
+        I have hands-on experience with HTML, CSS, JavaScript, and backend technologies, and I enjoy exploring new tools and AI solutions to improve my workflow and projects.  
+    </p>
+    <p class="p-about">
+        I thrive in collaborative environments, stay calm under pressure, and love turning concepts into real, working solutions that make a difference.
+    </p>
+</section>
+        </div>
+    </div>
+
+    <!-- === GITHUB SECTION === -->
+    <div class="Row" id="GitHub">
+    <div class="Column_1 Github-override-left">
+        <h1 class="Column-title">GitHub</h1><br>
+        <p class="p-about">
+            Check out my <a href="https://github.com/victoriamccabe" target="_blank">GitHub</a> to see projects I’ve been working on, including C#, JavaScript, Python, and web development. I enjoy experimenting, learning new tools, and turning ideas into working code.
+        </p>
+        <p class="p-github">
+            Explore my repositories and see how I approach coding challenges. <br><br>
+            <a href="https://github.com/victoriamccabe" target="_blank">Visit my GitHub profile</a>
+        </p>
+    </div>
+    <div class="Column_2 Github-override-right">
+        <a href="https://github.com/victoriamccabe" target="_blank">
+            <img src="images/git-hub.png" alt="GitHub Logo">
+        </a>
+    </div>
+</div>
+
+    <!-- === CONTACT FORM === -->
+    <div id="Contact">
+        <!-- Contact Button (always visible) -->
+        <button onclick="event.stopPropagation(); toggleForm();" class="Pop_Up_Button">CONTACT</button>
+
+        <!-- Contact Form Popup -->
+        <div class="form-popup" id="myForm">
+            <!-- Close X button -->
+            <button type="button" class="close-x" onclick="closeForm()">&times;</button>
+            <div class="contact-overlay" id="contact-overlay">
+                <span class="coming-soon-text">COMING SOON</span>
+            </div>
+            <form action="https://formspree.io/info@learncodinganywhere.com" method="POST" class="form-container">
+                <h1>Contact</h1>
+                <label for="name"><b>Name</b></label>
+                <input type="text" placeholder="Type your name here" name="name" required>
+                <label for="phone"><b>Phone</b></label>
+                <input type="text" placeholder="Type your phone number here" name="phone">
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Type your email address here" name="email" required>
+                <label for="message"><b>Message</b></label>
+                <input type="text" placeholder="Type your message here" name="message">
+                <button type="submit" class="btn">SUBMIT</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">CLOSE</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- === FOOTER === -->
+    <footer>
+        <p class="footer-text">
+            &copy; 2025 Victoria McCabe | 
+            <a href="https://www.learncodinganywhere.com/" target="_blank">The Tech Academy</a>
+        </p>
+    </footer>
+
+    <!-- === JAVASCRIPT === -->
+    <script src="js/portfolio.js"></script>
+</body>
+</html>
