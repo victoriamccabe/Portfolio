@@ -199,7 +199,7 @@
         top: 50%;
         width: auto;
         padding: 2.4rem;
-        color: rgba(127, 145, 138, 0.952);
+        color: rgb(0, 0, 0);
         font-weight: bold;
         font-size: 1.8rem;
         border-radius: 0 3px 3px 0;
@@ -211,20 +211,21 @@
         border-radius: 3px 0 0 3px;
     }
     .Previous:hover, .Next:hover {
-        background-color: rgba(0, 0, 0, 0.8);
+        background-color: rgba(74, 68, 68, 0);
         color: white;
     }
     .text {
         color: white;
-        padding: 1.2rem;
+        padding: 0.3rem;
         position: absolute;
         bottom: 0;
         width: 100%;
         text-align: center;
         letter-spacing: 0.12rem;
         font-size: 1.2rem;
-        background-color: #3B3A43;
-        font-weight: bold;
+        
+        background: rgba(59,58,67,0.8); 
+        
         border-radius: 0 0 7px 7px;
     }
     .dot {
@@ -237,7 +238,7 @@
         transition: background-color 0.6s ease;
         z-index: 1;
     }
-    .active, .dot:hover { background-color: #3B3A43; }
+    .active, .dot:hover { background-color: rgba(0, 0, 0,0); }
     .fade {
         animation-name: fade;
         animation-duration: 1.5s;
