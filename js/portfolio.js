@@ -45,3 +45,25 @@ document.addEventListener("click", function(event){
         closeForm()
     }
 }, false )
+
+function openForm() {
+    document.getElementById("myForm").style.display = "block";
+    document.getElementById("contact-overlay").style.display = "flex";
+}
+function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+    document.getElementById("contact-overlay").style.display = "none";
+}
+
+function toggleForm() {
+    const form = document.getElementById("myForm");
+    const overlay = document.getElementById("contact-overlay");
+    if (form.style.display === "block") {
+        form.style.display = "none";
+        overlay.style.display = "none";
+    } else {
+        form.style.display = "block";
+        overlay.style.display = "flex";
+    }
+}
+
