@@ -4,87 +4,97 @@
     @import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap');
 
     html {
-        scroll-behavior: smooth;
-    }
+    scroll-behavior: smooth;
+}
 
-    body {
-        margin: 0;
-        font-family: "Afacad Flux", sans-serif;
-    }
+body {
+    
+    font-family: 'Afacad Flux', sans-serif;
+    background-color: #f2f2f2;
+}
 
-    h1 {
-        text-transform: uppercase;
-        text-align: center;
-        padding-top: 1.2rem;
-        color: #fff;
-        font-size: 3rem;
-        -webkit-text-stroke: 0.12rem #3B3A43;
-        letter-spacing: 0.125rem;
-        transition: transform 1s;
-    }
+h1 {
+    text-transform: uppercase;
+    text-align: center;
+    padding-top: 1rem;
+    color: var(--color-secondary);
+    font-size: 3rem;
+    -webkit-text-stroke: 0.12rem var(--color-primary);
+    letter-spacing: 0.125rem;
+    transition: transform 0.5s;
+}
 
-    h1:hover {
-        filter: grayscale(5%);
-        transform: scale(1.1);
-    }
+h1:hover {
+    transform: scale(1.05);
+}
 
-    p {
-        text-align: justify;
-        font-weight: 400;
-        letter-spacing: 0.12rem;
-        font-size: 3rem;
-        padding: 0 1.2rem;
-        transition: transform 1s;
-    }
+p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    transition: transform 0.3s;
+}
 
-    p:hover {
-        transform: scale(1.01);
-    }
+p:hover {
+    transform: scale(1.01);
+}
 
-    .p-about {
-        font-size: 1.08rem;
-        text-align: left;
-    }
+a {
+    color: var(--color-secondary);
+    font-weight: bold;
+}
 
-    .p-github {
-        font-size: 1.08rem;
-        text-align: center;
-    }
+a:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+}
 
-    a {
-        color: #fff;
-        font-weight: bold;
-    }
 
-    .quote-center,
-    q {
-        font-family: "Just Me Again Down Here", cursive;
-        font-weight: 400;
-        font-style: normal;
-        text-align: center;
-        color: #fff;
-        text-shadow:
-            -1px -1px 0 black,
-            1px -1px 0 black,
-            -1px 1px 0 black,
-            1px 1px 0 black;
-        font-size: 2.4rem;
-    }
+    .quote-center, q {
+    font-family: 'Just Me Again Down Here', cursive;
+    font-size: 2rem;
+    font-weight: 400;
+    text-align: center;
+    color: var(--color-secondary);
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+}
+/* Fixed card dimensions */
+.fixed-card {
+ max-height: 30rem;
+ max-width: 100%;
+}
 
-    img {
-        filter: grayscale(20%) brightness(80%);
-        border-radius: 8px;
-        max-width: 100%;
-        height: 21.25rem;
-        display: block;
-        margin: 0 auto;
-        transition: transform 1s;
-    }
+/*CAROUSEL STYLING*/
+/* Rounded corners for carousel container */
+#carouselExampleCaptions {
+    border-radius: 0.75rem; /* same as Bootstrap card default */
+    overflow: hidden;       /* ensures images don't spill outside corners */
+}
 
-    img:hover {
-        filter: grayscale(5%);
-        transform: scale(1.1);
-    }
+/* Ensure carousel images follow the rounded corners */
+#carouselExampleCaptions .carousel-item img {
+    border-radius: 0.75rem; 
+    object-fit: cover;       /* keeps image proportional while filling the container */
+}
+
+/* Optional: cursor pointer for clickable slides */
+.carousel-item {
+    cursor: pointer;
+}
+
+/* Carousel images fit exactly 200x200 */
+.carrousel-img {
+ max-height: 20rem;
+ }
+ .carousel-item {
+    cursor: pointer; /* shows pointer to indicate it's clickable */
+}
+ /* Invert carousel controls for dark background */
+.carousel-control-next,
+.carousel-control-prev /*, .carousel-indicators */ {
+    filter: invert(100%);
+}
 
     footer {
         padding: 1%;
@@ -96,6 +106,9 @@
         text-align: center;
         font-size: 1.2rem;
     }
+
+
+
 
     /***** NAVBAR STYLING *****/
     .Navbar {
@@ -171,50 +184,28 @@
 
     }
 
-    .video-projects {}
-
-
+    
 
 
     /***** TEXT OVER VIDEO *****/
     .Drop_Text {
-        margin-bottom: 5px;
-        background-color: rgba(89, 83, 90, 0.318);
-        color: #F7F0F7ff;
-        text-shadow:
-            -1px -1px 0 black,
-            1px -1px 0 black,
-            -1px 1px 0 black,
-            1px 1px 0 black;
-        padding: 2.4rem;
-        position: relative;
-        animation: moveVideoText 2s;
-    }
+    margin-top: 6.5rem !important; /* override */
+    animation: moveVideoText 1.5s ease forwards;
+}
 
-    #title-description {
-        outline: none;
-        background: none;
-        text-align: center;
-        font-weight: 400;
-        font-size: 1.5rem;
-    }
 
-    @keyframes moveVideoText {
-        from {
-            top: -120rem;
-        }
 
-        to {
-            top: 0;
-        }
-    }
+
+@keyframes moveVideoText {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
 
     /***** TABLE *****/
 
     .Content_Container {
-        background-color: rgba(127, 145, 138, 0.952); 
-    margin: 1rem; /* same as navbar’s side and top spacing */
-    margin-top: 7rem; /* navbar height + spacing */
+    background-color: rgba(89, 83, 90, 0.35);
+     margin: 0.5rem 1rem 1rem 1rem; /* top right bottom left */
     border-radius: 1rem; /* match navbar’s rounding */
     padding: 2rem; /* internal padding for text/content */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* optional soft shadow */
@@ -268,54 +259,7 @@
         display: none;
     }
 
-    /***** SLIDE SHOW *****/
-    #Slideshow_Container {
-        width: 21.6rem;
-        max-width: 60rem;
-        height: auto;
-        position: relative;
-        margin: auto;
-    }
 
-    #Slideshow_Container a {
-        text-decoration: none;
-    }
-
-    .Slideshow_Images {
-        vertical-align: middle;
-        height: auto;
-        box-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.5);
-        width: 100%;
-        max-width: 100%;
-        filter: grayscale(10%) brightness(90%) contrast(90%) saturate(90%);
-
-    }
-
-    .Previous,
-    .Next {
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        width: auto;
-        padding: 2.4rem;
-        color: rgb(0, 0, 0);
-        font-weight: bold;
-        font-size: 1.8rem;
-        border-radius: 0 3px 3px 0;
-        user-select: none;
-        transition: 0.6s ease;
-    }
-
-    .Next {
-        right: 0;
-        border-radius: 3px 0 0 3px;
-    }
-
-    .Previous:hover,
-    .Next:hover {
-        background-color: rgba(74, 68, 68, 0);
-        color: white;
-    }
 
     .text {
         color: white;
@@ -365,151 +309,179 @@
     }
 
     /***** CONTACT FORM *****/
-    .Pop_Up_Button {
-        position: fixed;
-        bottom: 1.8rem;
-        right: 1.2rem;
-        width: 24rem;
-        height: 6rem;
-        background-color: rgb(107, 118, 110);
-        color: #fff;
-        border: solid #fff;
-        cursor: pointer;
-        animation: movePopup 1.2s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
+:root {
+    --color-primary: #3B3A43;
+    --color-secondary: #F7F0F7;
+    --color-accent: #D6C1BF;
+    --color-muted: #6B7670;
+    --color-shadow: rgba(0, 0, 0, 0.25);
+}
 
-    @keyframes movePopup {
-        from {
-            right: -48rem;
-        }
+/* Floating "Contact Us" button */
+.Pop_Up_Button {
+    position: fixed;
+    bottom: 1.8rem;
+    right: 1.2rem;
+    width: 18rem;
+    height: 4.5rem;
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 4px 10px var(--color-shadow);
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    letter-spacing: 0.1rem;
+    transition: all 0.4s ease;
+    animation: movePopup 1s forwards;
+    z-index: 20;
+}
 
-        to {
-            right: 2.1rem;
-        }
-    }
+.Pop_Up_Button:hover {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    transform: translateY(-2px);
+}
 
-    .form-popup {
-        position: sticky;
-        right: 2.4rem;
-        z-index: 8;
-        display: none;
-        margin: 60rem;
-    }
+/* Slide-in animation for button */
+@keyframes movePopup {
+    from { transform: translateX(120%); }
+    to { transform: translateX(0); }
+}
 
-    .form-container {
-        max-width: 36rem;
-        height: auto;
-        padding: 1.2rem;
-        background-color: rgba(127, 145, 138, 0.952);
-        ;
-    }
+/* Overlay (optional dim background) */
+.contact-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 15;
+    justify-content: center;
+    align-items: center;
+}
 
-    .form-container input[type=text] {
-        width: 100%;
-        padding: 1.1rem;
-        margin: 0.7rem 0;
-        border: none;
-        background: #fff;
-        font-size: 1.2rem;
-    }
+/* Popup container */
+.form-popup {
+    position: fixed;
+    right: 2rem;
+    bottom: 7rem;
+    display: none;
+    z-index: 30;
+    background-color: var(--color-secondary);
+    border-radius: 1rem;
+    box-shadow: 0 6px 16px var(--color-shadow);
+    overflow: hidden;
+    animation: fadeIn 0.6s ease forwards;
+}
 
-    button,
-    .form-container .btn {
-        letter-spacing: 0.24rem;
-        font-size: 1.2rem;
-        font-weight: bold;
-        padding: 1.2rem;
-        cursor: pointer;
-        width: 100%;
-        transition: background 1s, color 1s, border-color 1s;
-    }
+/* Inside form styling */
+.form-container {
+    max-width: 32rem;
+    padding: 2rem;
+}
 
-    button:hover,
-    .form-container .btn:hover {
-        color: white;
-        background-color: #3B3A43;
-        border-color: silver;
-    }
+.form-container label {
+    font-size: 1rem;
+    color: var(--color-primary);
+    font-weight: 600;
+}
 
-    .form-container .btn {
-        background-color: white;
-        color: #3B3A43;
-        border-color: #3B3A43;
-        margin-bottom: 1vh;
-    }
+.form-container input[type=text],
+.form-container input[type=email],
+.form-container textarea {
+    width: 100%;
+    padding: 0.9rem;
+    margin: 0.6rem 0 1rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 0.6rem;
+    background-color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
 
-    .form-container .cancel {
-        background-color: black;
-        color: white;
-        border-color: gray;
-    }
+.form-container input:focus,
+.form-container textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
 
-    .form-container .cancel:hover {
-        background-color: rgb(97, 48, 48);
-        border-color: #3B3A43;
-    }
 
-    label {
-        font-size: 1.6rem;
-        color: #3B3A43;
-    }
+.form-container .btn {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    border: none;
+    border-radius: 0.6rem;
+    font-size: 1.1rem;
+    padding: 0.9rem;
+    width: 100%;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 0.8rem;
+}
 
-    /* Overlay only over the form */
-    .contact-overlay {
-        display: none;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(60, 60, 60, 0.7);
-        z-index: 10;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+.form-container .btn:hover {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+}
 
-    .form-popup {
-        position: fixed;
-        right: 2.4rem;
-        bottom: 5vh;
-        z-index: 9;
-        display: none;
-        margin: 0;
-        max-width: 36rem;
-    }
+/* Cancel button */
+.form-container .cancel {
+    background-color: #999;
+    color: #fff;
+}
 
-    .coming-soon-text {
-        text-align: center;
-        color: #fff;
-        font-size: 2.4rem;
-        font-weight: bold;
-        letter-spacing: 0.24rem;
-        text-shadow: 2px 2px 8px #000;
-    }
+.form-container .cancel:hover {
+    background-color: #6b6b6b;
+}
 
-    .coming-soon-email {
-        font-size: 1rem;
-        ;
-    }
+/* Close button */
+.close-x {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.9rem;
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--color-primary);
+    cursor: pointer;
+    z-index: 50; /* higher than the popup z-index */
+}
 
-    .close-x {
-        position: absolute;
-        background: transparent;
-        border: none;
-        font-size: 2rem;
-        color: #fff;
-        cursor: pointer;
-        z-index: 20;
-    }
+.close-x:hover {
+    color: var(--color-accent);
+}
 
-    .close-x:hover {
-        color: #ff6666;
-    }
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(2rem); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* “Coming Soon” Text (if used) */
+.coming-soon-text {
+    text-align: center;
+    color: var(--color-primary);
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+}
+
+.coming-soon-email {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--color-muted);
+}
+
 
     @media (max-width: 600px) {
 

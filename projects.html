@@ -38,71 +38,187 @@
 
 
 
-
     <!-- === CONTAINERS SECTION === -->
-    <div class="Content_Container">
-        <div class="Row" id="About">
 
-            <div class="card">
-                <div class="card-header">
-                    Featured
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
+
+
+    <!--DROP CARD -->
+    <div class="Drop_Text text-center  Content_Container">
+        <h1 class="white-text">Victoria McCabe Portfolio</h1>
+        <q class="quote-center">It’s not about ideas. It’s about making ideas happen.</q>
+        <p id="title-description">
+            I’m Victoria McCabe, a junior software developer who loves turning ideas into clean, user-friendly web
+            applications. I solve problems quickly, embrace AI tools to work smarter, and focus on creating
+            solutions that look great and are simple to use.
+        </p>
+    </div>
+
+
+
+    <!-- === 6 Cards Section === -->
+    <div class="Content_Container my-5">
+
+        <div class="card text-center mb-5">
+            <div class="card-header">
+                <ul class="nav nav-pills card-header-pills">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Active</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
             </div>
-
-            <!-- Left Container  -->
-            <div class="Column_2">
-                <div id="Slideshow_Container">
-                    <!-- Slides -->
-                    <div class="mySlides fade">
-                        <video controls class="Slideshow_Images">
-                            <source src="images/video/BlueBirdBanking.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-
-                    </div>
-
-                </div>
-            </div>
-            <!-- Right Container -->
-            <div class="Column_1">
-                <h1 class="Column-title">About</h1><br>
-                <section id="about">
-                    <p class="p-about">
-                        I’m passionate about building web apps that not only work but delight users. My approach is
-                        simple: understand what the client wants, solve problems efficiently, and focus on usability and
-                        design.
-                    </p>
-
-                </section>
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
         </div>
 
-        <!-- === GITHUB SECTION === -->
-        <div class="Row" id="GitHub">
-            <div class="Column_1 Github-override-left">
-                <h1 class="Column-title">GitHub</h1><br>
-                <p class="p-about">
-                    Check out my <a href="https://github.com/victoriamccabe" target="_blank">GitHub</a> to see projects
-                    I’ve been working on, including C#, JavaScript, Python, and web development. I enjoy experimenting,
-                    learning new tools, and turning ideas into working code.
-                </p>
-                <p class="p-github">
-                    Explore my repositories and see how I approach coding challenges. <br><br>
-                    <a href="https://github.com/victoriamccabe" target="_blank">Visit my GitHub profile</a>
-                </p>
+        <!-- First Row -->
+        <div class="row g-4 mt-4">
+
+            <!-- Card 1 -->
+
+            <!--SLIDESHOW-->
+            <div class="col-md-6 fixed-card">
+                <div class="card  h-100 p-2 align-items-center bg-transparent border-0">
+                    <div id="carouselExampleCaptions" class="carousel slide">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                                aria-label="Slide 3"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+                                aria-label="Slide 4"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4"
+                                aria-label="Slide 5"></button>
+                        </div>
+                        <div class="carousel-inner">
+
+                            <div class="carousel-item active"
+                                onclick="window.open('https://yourwebsite.com', '_blank')">
+                                <img src="images/Victoria-McCabe.png" class="d-block w-100 carrousel-img"
+                                    alt="Victoria McCabe">
+                            </div>
+
+                            <div class="carousel-item"
+                                onclick="window.open('https://github.com/victoriamccabe/Python-Projects', '_blank')">
+                                <img src="images/Python.jpg" class="d-block w-100 carrousel-img" alt="Python logo">
+                            </div>
+
+                            <div class="carousel-item"
+                                onclick="window.open('https://github.com/victoriamccabe', '_blank')">
+                                <img src="images/HTML_CSS_and_JavaScript.jpg" class="d-block w-100 carrousel-img"
+                                    alt="HTML, CSS, JS logos">
+                            </div>
+
+                            <div class="carousel-item"
+                                onclick="window.open('https://github.com/victoriamccabe/SQL-Projects', '_blank')">
+                                <img src="images/SQL_and_Database.png" class="d-block w-100 carrousel-img"
+                                    alt="SQL logo">
+                            </div>
+
+                            <div class="carousel-item"
+                                onclick="window.open('https://github.com/victoriamccabe/C-Sharp-Projects', '_blank')">
+                                <img src="images/C_Sharp_and_Dot_NET.png" class="d-block w-100 carrousel-img"
+                                    alt="C# logo">
+                            </div>
+
+                        </div>
+
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="Column_2 Github-override-right">
-                <a href="https://github.com/victoriamccabe" target="_blank">
-                    <img src="images/git-hub.png" alt="GitHub Logo">
-                </a>
+
+            <!-- Card 2 -->
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100">
+                    <img src="images/project4.png" class="card-img-top" alt="Project 4">
+                    <div class="card-body">
+                        <h5 class="card-title">Project 4</h5>
+                        <p class="card-text">Short description of Project 4.</p>
+                        <a href="#" class="btn btn-primary">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Row -->
+        <div class="row g-4 mt-4">
+            <!-- Card 3 -->
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100">
+                    <img src="images/project3.png" class="card-img-top" alt="Project 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Project 3</h5>
+                        <p class="card-text">Short description of Project 3.</p>
+                        <a href="#" class="btn btn-primary">View Project</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100">
+                    <img src="images/project4.png" class="card-img-top" alt="Project 4">
+                    <div class="card-body">
+                        <h5 class="card-title">Project 4</h5>
+                        <p class="card-text">Short description of Project 4.</p>
+                        <a href="#" class="btn btn-primary">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Third Row -->
+        <div class="row g-4 mt-4">
+            <!-- Card 5 -->
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100">
+                    <img src="images/project5.png" class="card-img-top" alt="Project 5">
+                    <div class="card-body">
+                        <h5 class="card-title">Project 5</h5>
+                        <p class="card-text">Short description of Project 5.</p>
+                        <a href="#" class="btn btn-primary">View Project</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100">
+                    <img src="images/project6.png" class="card-img-top" alt="Project 6">
+                    <div class="card-body">
+                        <h5 class="card-title">Project 6</h5>
+                        <p class="card-text">Short description of Project 6.</p>
+                        <a href="#" class="btn btn-primary">View Project</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+
+
+
     <!-- === CONTACT FORM === -->
     <div id="Contact">
         <!-- Contact Button (always visible) -->
@@ -131,19 +247,19 @@
                 <button type="button" class="btn cancel" onclick="closeForm()">CLOSE</button>
             </form>
         </div>
-    </div>
 
-    <!-- === FOOTER === -->
-    <footer>
-        <p class="footer-text">
-            &copy; 2025 Victoria McCabe
 
-        </p>
-    </footer>
+        <!-- === FOOTER === -->
+        <footer>
+            <p class="footer-text">
+                &copy; 2025 Victoria McCabe
 
-    <!-- === JAVASCRIPT === -->
-    <script src="js/portfolio.js"></script>
-    <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+            </p>
+        </footer>
+
+        <!-- === JAVASCRIPT === -->
+        <script src="js/portfolio.js"></script>
+        <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
