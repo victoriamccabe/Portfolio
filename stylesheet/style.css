@@ -59,6 +59,14 @@ a:hover {
     color: var(--color-secondary);
     text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
 }
+
+/* CARD STYLING */
+
+.video-card{
+    max-height: 20rem;
+    max-width: 100%;
+}
+
 /* Fixed card dimensions */
 .fixed-card {
  max-height: 30rem;
@@ -66,6 +74,7 @@ a:hover {
 }
 
 /*CAROUSEL STYLING*/
+
 /* Rounded corners for carousel container */
 #carouselExampleCaptions {
     border-radius: 0.75rem; /* same as Bootstrap card default */
@@ -171,18 +180,18 @@ a:hover {
     }
 
 
-    /***** VIDEOS *****/
     #loop_Video {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -2;
-        object-fit: cover;
-        filter: brightness(90%) contrast(80%) saturate(120%) blur(3px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    object-fit: cover;
+    filter: brightness(90%) contrast(80%) saturate(120%) blur(3px);
+    pointer-events: none; /* prevents clicks on the video */
+}
 
-    }
 
     
 
