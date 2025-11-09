@@ -90,6 +90,7 @@ a:hover {
 /* Optional: cursor pointer for clickable slides */
 .carousel-item {
     cursor: pointer;
+
 }
 
 /* Carousel images fit exactly 200x200 */
@@ -115,7 +116,6 @@ a:hover {
         text-align: center;
         font-size: 1.2rem;
     }
-
 
 
 
@@ -573,3 +573,7 @@ a:hover {
             font-size: 1rem;
         }
     }
+
+    /*-----------------------------------------*/
+
+ 
