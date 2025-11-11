@@ -1,577 +1,587 @@
-    /***** GENERAL STYLING *****/
+/****************************************************
+ ******************** GLOBAL STYLES *****************
+ ****************************************************/
 
-    @import url('https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap');
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap');
 
-    html {
-    scroll-behavior: smooth;
+/* CSS Variables (Theme Colors) */
+:root {
+  --color-primary: #3B3A43;
+  --color-secondary: #F7F0F7;
+  --color-accent: #D6C1BF;
+  --color-muted: #6B7670;
+  --color-shadow: rgba(0, 0, 0, 0.25);
 }
 
+/* Smooth scrolling across the document */
+html {
+  scroll-behavior: smooth;
+}
+
+/* General Body Styling */
 body {
-    
-    font-family: 'Afacad Flux', sans-serif;
-    background-color: #f2f2f2;
+  font-family: 'Afacad Flux', sans-serif;
+  background-color: #f2f2f2;
 }
+
+/****************************************************
+ ******************** TYPOGRAPHY ********************
+ ****************************************************/
 
 h1 {
-    text-transform: uppercase;
-    text-align: center;
-    padding-top: 1rem;
-    color: var(--color-secondary);
-    font-size: 3rem;
-    -webkit-text-stroke: 0.12rem var(--color-primary);
-    letter-spacing: 0.125rem;
-    transition: transform 0.5s;
+  text-transform: uppercase;
+  text-align: center;
+  padding-top: 1rem;
+  color: var(--color-secondary);
+  font-size: 3rem;
+  -webkit-text-stroke: 0.12rem var(--color-primary);
+  letter-spacing: 0.125rem;
+  transition: transform 0.5s ease;
 }
 
 h1:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: var(--color-primary);
-    margin-bottom: 1rem;
-    transition: transform 0.3s;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
 }
 
 p:hover {
-    transform: scale(1.01);
+  transform: scale(1.01);
 }
 
 a {
-    color: var(--color-secondary);
-    font-weight: bold;
+  color: var(--color-secondary);
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 a:hover {
-    color: var(--color-accent);
-    text-decoration: none;
+  color: var(--color-accent);
+}
+
+.quote-center, q {
+  font-family: 'Just Me Again Down Here', cursive;
+  font-size: 2rem;
+  text-align: center;
+  color: var(--color-secondary);
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black,
+               -1px 1px 0 black, 1px 1px 0 black;
 }
 
 
-    .quote-center, q {
-    font-family: 'Just Me Again Down Here', cursive;
-    font-size: 2rem;
-    font-weight: 400;
-    text-align: center;
-    color: var(--color-secondary);
-    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+/****************************************************
+ ******************** CAPTCHA ***********************
+ ****************************************************/
+
+/* Full-page overlay */
+#captcha-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* translucent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* make sure it is on top of everything */
 }
 
-/* CARD STYLING */
-
-.video-card{
-    max-height: 20rem;
-    max-width: 100%;
+/* CAPTCHA container */
+.captcha-container {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  text-align: center;
 }
 
-/* Fixed card dimensions */
-.fixed-card {
- max-height: 30rem;
- max-width: 100%;
+/****************************************************
+ ******************** NAVBAR ***********************
+ ****************************************************/
+
+.Navbar {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  width: calc(100% - 2rem);
+  background-color: var(--color-primary);
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px var(--color-shadow);
+  z-index: 10;
+  animation: slideInNav 1s forwards;
 }
 
-/*CAROUSEL STYLING*/
+@keyframes slideInNav {
+  from { transform: translateX(-120%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
 
-/* Rounded corners for carousel container */
+/* Links styling */
+.Navbar .nav-link {
+  color: var(--color-secondary) !important;
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 0.9rem 1rem;
+  transition: background 0.3s ease, color 0.3s ease;
+  animation: slideInText 1.2s ease forwards;
+}
+
+@keyframes slideInText {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.Navbar .nav-link:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-primary) !important;
+  font-weight: bold;
+  border-radius: 0.5rem;
+}
+
+.Navbar .nav-link.active {
+  background-color: var(--color-accent);
+  color: var(--color-primary) !important;
+  border-radius: 0.5rem;
+}
+
+.Navbar .navbar-brand {
+  color: var(--color-secondary) !important;
+  font-weight: 700;
+  letter-spacing: 0.05rem;
+}
+
+
+/****************************************************
+ ******************** VIDEO BACKGROUND **************
+ ****************************************************/
+
+#loop_Video {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: -2;
+  object-fit: cover;
+  filter: brightness(90%) contrast(80%) saturate(120%) blur(3px);
+  pointer-events: none;
+}
+
+/****************************************************
+ ******************** TEXT OVER VIDEO ***************
+ ****************************************************/
+
+.Drop_Text {
+  margin-top: 6.5rem !important;
+  animation: fadeInText 1.5s ease forwards;
+}
+
+@keyframes fadeInText {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+
+/****************************************************
+ ******************** CONTENT SECTIONS ***************
+ ****************************************************/
+
+.Content_Container {
+  background-color: rgba(89, 83, 90, 0.35);
+  margin: 0.5rem 1rem 1rem;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Two-column layout */
+.Column_1, .Column_2 {
+  float: left;
+  width: 50%;
+  margin: 0.3rem 0;
+  padding: 0.6rem;
+  height: 31.9rem;
+}
+
+.Column_1 {
+  background-color: #baafb2;
+}
+
+.Column_2 {
+  background-color: rgba(89, 83, 90, 0.318);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.Row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.Column-title {
+  font-size: 2.4rem;
+}
+
+/****************************************************
+ ******************** CARDS & CAROUSEL **************
+ ****************************************************/
+
+/* General card styling */
+.video-card, .fixed-card {
+  max-width: 100%;
+  border-radius: 0.75rem;
+}
+
+.video-card { max-height: 20rem; }
+.fixed-card { max-height: 30rem; }
+
+/* Carousel appearance */
 #carouselExampleCaptions {
-    border-radius: 0.75rem; /* same as Bootstrap card default */
-    overflow: hidden;       /* ensures images don't spill outside corners */
+  width: 100%;
+  max-width: 500px;  
+  height: 500px;     /* fixed height to prevent vertical jumps */
+  border-radius: 0.75rem;
+  overflow: hidden;
 }
 
-/* Ensure carousel images follow the rounded corners */
+
 #carouselExampleCaptions .carousel-item img {
-    border-radius: 0.75rem; 
-    object-fit: cover;       /* keeps image proportional while filling the container */
+  border-radius: 0.75rem;
+  object-fit: cover;
 }
 
-/* Optional: cursor pointer for clickable slides */
+
+
 .carousel-item {
-    
-    cursor: pointer; /* shows pointer to indicate it's clickable */
+  cursor: pointer;
 }
 
-/* Carousel images fit exactly 200x200 */
-.carrousel-img {
- max-height: 20rem;
- }
-
- /* Invert carousel controls for dark background */
 .carousel-control-next,
-.carousel-control-prev /*, .carousel-indicators */ {
-    filter: invert(100%);
+.carousel-control-prev {
+  filter: invert(100%);
 }
 
-    footer {
-        padding: 1%;
-        background-color: #3B3A43;
-        color: #BBC8CE;
-    }
+/****************************************************
+ ******************** SLIDESHOW *********************
+ ****************************************************/
 
-    .footer-text {
-        text-align: center;
-        font-size: 1.2rem;
-    }
+.mySlides { display: none; }
 
-
-
-    /***** NAVBAR STYLING *****/
-    .Navbar {
-        overflow: hidden;
-        background-color: #3B3A43;
-        position: fixed;
-        top: 1rem;
-        /* space from top */
-        left: 1rem;
-        /* final resting position */
-        width: calc(100% - 2rem);
-        /* equal spacing on both sides */
-        border-radius: 1rem;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        z-index: 10;
-        animation: moveNav 1s forwards;
-    }
-
-    @keyframes moveNav {
-        from {
-            transform: translateX(-120%);
-        }
-
-        to {
-            transform: translateX(0);
-        }
-    }
-
-    .Navbar a {
-        float: left;
-        display: block;
-        color: #F7F0F7ff;
-        padding: 0.9rem 1rem;
-        text-decoration: none;
-        font-size: 1.2rem;
-        text-align: center;
-        position: relative;
-        animation: moveNavText 2s forwards;
-        /* same idea here */
-    }
-
-    @keyframes moveNavText {
-        from {
-            top: -120rem;
-        }
-
-        to {
-            top: 0;
-        }
-    }
-
-    .Navbar a:hover {
-        background-color: #F7F0F7ff;
-        color: #3B3A43;
-        font-weight: bold;
-    }
-
-    .Navbar a.active {
-        background-color: #D6C1BF;
-    }
-
-
-    #loop_Video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-    object-fit: cover;
-    filter: brightness(90%) contrast(80%) saturate(120%) blur(3px);
-    pointer-events: none; /* prevents clicks on the video */
+.text {
+  color: white;
+  padding: 0.3rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background: rgba(59, 58, 67, 0.8);
+  border-radius: 0 0 7px 7px;
+  font-size: 1.2rem;
+  letter-spacing: 0.12rem;
 }
 
-
-    
-
-
-    /***** TEXT OVER VIDEO *****/
-    .Drop_Text {
-    margin-top: 6.5rem !important; /* override */
-    animation: moveVideoText 1.5s ease forwards;
+.dot {
+  cursor: pointer;
+  height: 1.2rem;
+  width: 1.2rem;
+  margin: 0.3rem;
+  background-color: white;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
 }
 
-
-
-
-@keyframes moveVideoText {
-    from { transform: translateY(-50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+.active, .dot:hover {
+  background-color: rgba(0, 0, 0, 0);
 }
 
-    /***** TABLE *****/
-
-    .Content_Container {
-    background-color: rgba(89, 83, 90, 0.35);
-     margin: 0.5rem 1rem 1rem 1rem; /* top right bottom left */
-    border-radius: 1rem; /* match navbar’s rounding */
-    padding: 2rem; /* internal padding for text/content */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* optional soft shadow */
-    }
-
-    .Column_1,
-    .Column_2 {
-        float: left;
-        width: 50%;
-        margin: 0.3rem 0;
-        padding: 0.6rem;
-        height: 31.9rem;
-    }
-
-    .Column_1 {
-        background-color: #baafb2;
-    }
-
-    .Column_2 {
-        background-color: rgba(89, 83, 90, 0.318);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .Column_tall {
-        height: 28.1rem;
-        padding: 31.2rem;
-    }
-
-    .Row:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
-
-    .Github-override-left {
-        background-color: rgb(107, 118, 110);
-    }
-
-    .Column-title {
-        font-size: 2.4rem;
-    }
-
-    #Slideshow_Background {
-        display: block;
-    }
-
-    .mySlides {
-        display: none;
-    }
-
-
-
-    .text {
-        color: white;
-        padding: 0.3rem;
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-        letter-spacing: 0.12rem;
-        font-size: 1.2rem;
-
-        background: rgba(59, 58, 67, 0.8);
-
-        border-radius: 0 0 7px 7px;
-    }
-
-    .dot {
-        cursor: pointer;
-        height: 1.2rem;
-        width: 1.2rem;
-        margin: 0.3rem;
-        background-color: white;
-        border-radius: 50%;
-        display: inline-block;
-        transition: background-color 0.6s ease;
-        z-index: 1;
-    }
-
-    .active,
-    .dot:hover {
-        background-color: rgba(0, 0, 0, 0);
-    }
-
-    .fade {
-        animation-name: fade;
-        animation-duration: 1.5s;
-    }
-
-    @keyframes fade {
-        from {
-            opacity: .4;
-        }
-
-        to {
-            opacity: 1;
-        }
-    }
-
-    /***** CONTACT FORM *****/
-:root {
-    --color-primary: #3B3A43;
-    --color-secondary: #F7F0F7;
-    --color-accent: #D6C1BF;
-    --color-muted: #6B7670;
-    --color-shadow: rgba(0, 0, 0, 0.25);
+.fade {
+  animation: fade 1.5s ease;
 }
+
+@keyframes fade {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}
+
+/****************************************************
+ ******************** FOOTER ************************
+ ****************************************************/
+
+footer {
+  padding: 1%;
+  background-color: var(--color-primary);
+  color: #BBC8CE;
+  text-align: center;
+}
+
+.footer-text {
+  font-size: 1.2rem;
+}
+
+/****************************************************
+ ******************** CONTACT FORM ******************
+ ****************************************************/
 
 /* Floating "Contact Us" button */
 .Pop_Up_Button {
-    position: fixed;
-    bottom: 1.8rem;
-    right: 1.2rem;
-    width: 18rem;
-    height: 4.5rem;
-    background-color: var(--color-primary);
-    color: var(--color-secondary);
-    border: none;
-    border-radius: 1rem;
-    box-shadow: 0 4px 10px var(--color-shadow);
-    font-size: 1.2rem;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    letter-spacing: 0.1rem;
-    transition: all 0.4s ease;
-    animation: movePopup 1s forwards;
-    z-index: 20;
+  position: fixed;
+  bottom: 1.8rem;
+  right: 1.2rem;
+  width: 18rem;
+  height: 4.5rem;
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px var(--color-shadow);
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 0.1rem;
+  transition: all 0.4s ease;
+  animation: slideInButton 1s forwards;
+  z-index: 20;
 }
 
 .Pop_Up_Button:hover {
-    background-color: var(--color-accent);
-    color: var(--color-primary);
-    transform: translateY(-2px);
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+  transform: translateY(-2px);
 }
 
-/* Slide-in animation for button */
-@keyframes movePopup {
-    from { transform: translateX(120%); }
-    to { transform: translateX(0); }
+@keyframes slideInButton {
+  from { transform: translateX(120%); }
+  to { transform: translateX(0); }
 }
 
-/* Overlay (optional dim background) */
+/* Overlay (background dim when form opens) */
 .contact-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 15;
-    justify-content: center;
-    align-items: center;
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 15;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Popup container */
+/* Form popup container */
 .form-popup {
-    position: fixed;
-    right: 2rem;
-    bottom: 7rem;
-    display: none;
-    z-index: 30;
-    background-color: var(--color-secondary);
-    border-radius: 1rem;
-    box-shadow: 0 6px 16px var(--color-shadow);
-    overflow: hidden;
-    animation: fadeIn 0.6s ease forwards;
+  position: fixed;
+  right: 2rem;
+  bottom: 7rem;
+  display: none;
+  background-color: var(--color-secondary);
+  border-radius: 1rem;
+  box-shadow: 0 6px 16px var(--color-shadow);
+  animation: fadeIn 0.6s ease forwards;
+  z-index: 30;
 }
 
-/* Inside form styling */
+/* Inside form */
 .form-container {
-    max-width: 32rem;
-    padding: 2rem;
+  max-width: 32rem;
+  padding: 2rem;
 }
 
 .form-container label {
-    font-size: 1rem;
-    color: var(--color-primary);
-    font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-primary);
+  font-weight: 600;
 }
 
 .form-container input[type=text],
 .form-container input[type=email],
 .form-container textarea {
-    width: 100%;
-    padding: 0.9rem;
-    margin: 0.6rem 0 1rem;
-    border: 1px solid var(--color-accent);
-    border-radius: 0.6rem;
-    background-color: #fff;
-    font-size: 1rem;
-    transition: border-color 0.3s;
+  width: 100%;
+  padding: 0.9rem;
+  margin: 0.6rem 0 1rem;
+  border: 1px solid var(--color-accent);
+  border-radius: 0.6rem;
+  font-size: 1rem;
+  transition: border-color 0.3s;
 }
 
 .form-container input:focus,
 .form-container textarea:focus {
-    outline: none;
-    border-color: var(--color-primary);
+  outline: none;
+  border-color: var(--color-primary);
 }
 
-
+/* Buttons inside form */
 .form-container .btn {
-    background-color: var(--color-primary);
-    color: var(--color-secondary);
-    border: none;
-    border-radius: 0.6rem;
-    font-size: 1.1rem;
-    padding: 0.9rem;
-    width: 100%;
-    font-weight: 600;
-    letter-spacing: 0.1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-bottom: 0.8rem;
+  width: 100%;
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+  border: none;
+  border-radius: 0.6rem;
+  font-size: 1.1rem;
+  padding: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 0.8rem;
 }
 
 .form-container .btn:hover {
-    background-color: var(--color-accent);
-    color: var(--color-primary);
+  background-color: var(--color-accent);
+  color: var(--color-primary);
 }
 
-/* Cancel button */
 .form-container .cancel {
-    background-color: #999;
-    color: #fff;
+  background-color: #999;
+  color: #fff;
 }
 
 .form-container .cancel:hover {
-    background-color: #6b6b6b;
+  background-color: #6b6b6b;
 }
 
-/* Close button */
+/* Close button (X) */
 .close-x {
-    position: absolute;
-    top: 0.6rem;
-    right: 0.9rem;
-    background: transparent;
-    border: none;
-    font-size: 1.8rem;
-    color: var(--color-primary);
-    cursor: pointer;
-    z-index: 50; /* higher than the popup z-index */
+  position: absolute;
+  top: 0.6rem;
+  right: 0.9rem;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--color-primary);
+  cursor: pointer;
+  z-index: 50;
 }
 
 .close-x:hover {
-    color: var(--color-accent);
+  color: var(--color-accent);
 }
 
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(2rem); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* “Coming Soon” Text (if used) */
+/* “Coming Soon” section */
 .coming-soon-text {
-    text-align: center;
-    color: var(--color-primary);
-    font-size: 1.8rem;
-    font-weight: 700;
-    letter-spacing: 0.1rem;
+  text-align: center;
+  color: var(--color-primary);
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
 }
 
 .coming-soon-email {
-    text-align: center;
-    font-size: 1rem;
-    color: var(--color-muted);
+  text-align: center;
+  font-size: 1rem;
+  color: var(--color-muted);
 }
 
+/****************************************************
+ ******************** ANIMATIONS ********************
+ ****************************************************/
 
-    @media (max-width: 600px) {
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(2rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-        .Column_1,
-        .Column_2 {
-            width: 100%;
-            height: auto;
-        }
+/****************************************************
+ ******************** RESPONSIVE DESIGN *************
+ ****************************************************/
 
-        .Pop_Up_Button {
-            width: 8rem;
-            height: 2.2rem;
-            font-size: 1rem;
-        }
+/* For screens ≤ 600px (phones) */
+@media (max-width: 600px) {
+  
+    .Column_1, .Column_2 {
+    width: 100%;
+    height: auto;
+  }
 
-        .form-popup {
-            right: 0.6rem;
-            bottom: 1.2rem;
-            max-width: 90%;
-        }
+  .Pop_Up_Button {
+    width: 10rem;
+    height: 2.5rem;
+    font-size: 1rem;
+  }
 
-        .form-container {
-            padding: 0.6rem;
-        }
+  .form-popup {
+    right: 0.6rem;
+    bottom: 1.2rem;
+    max-width: 90%;
+  }
 
-        .form-container input[type=text] {
-            padding: 0.6rem;
-            font-size: 1rem;
-        }
+  .form-container {
+    padding: 0.6rem;
+  }
 
-        button,
-        .form-container .btn {
-            letter-spacing: 0.12rem;
-            font-size: 1rem;
-            padding: 0.6rem;
-        }
+  h1 { font-size: 2rem; }
+  p, .quote-center, q { font-size: 1.2rem; }
+  .Drop_Text { padding: 1rem; }
+  #title-description { font-size: 1rem; }
+  
+  .navbar-expand-custom .navbar-collapse.collapse:not(.show) {
+    display: none !important; /* hidden by default */
+  }
+  .navbar-expand-custom .navbar-collapse.show {
+    display: block !important; /* shown when toggled */
+  }
+  .navbar-expand-custom .navbar-nav {
+    flex-direction: column;
+  }
+  .navbar-expand-custom .navbar-toggler {
+    display: block;
+  }
+   .navbar-collapse {
+    padding-top: 0.5rem;
+    max-height: 0;
+    overflow: hidden;
+      animation: slideInButton 1s forwards; /* same as Pop_Up_Button */
+    transition: all 0.4s ease;
+  }
 
-        label {
-            font-size: 1.2rem;
-        }
-
-        h1 {
-            font-size: 2.4rem;
-        }
-
-        p {
-            font-size: 2.4rem;
-        }
-
-        .quote-center,
-        q {
-            font-size: 1.8rem;
-        }
-
-        .Drop_Text {
-            padding: 1.2rem;
-        }
-
-        #title-description {
-            font-size: 1rem;
-        }
-
+  .navbar-collapse.show {
+    max-height: 500px; /* adjust if you have many links */
+    transition: all 0.4s ease-in;
+  }
+  
+  /*Adjust ul nav links for small screens*/
+    .navbar-nav .nav-link {
+        padding: 0.7rem 1rem;
+        font-size: 1rem;
     }
+    
+}
 
-    @media (max-width: 450px) {
-        .Pop_Up_Button {
-            width: 15rem;
-            height: 4.2rem;
-            font-size: 1rem;
-            padding: 0.6rem;
-        }
+/* Hide collapse above 600px = expanded state */
+@media (min-width: 601px) {
+  .navbar-expand-custom .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+  }
+  .navbar-expand-custom .navbar-toggler {
+    display: none;
+  }
+  .navbar-expand-custom .navbar-nav {
+    flex-direction: row;
+  }
+}
 
-        .coming-soon-text {
-            font-size: 1.8rem;
-        }
+/* For ultra-small screens ≤ 300px */
+@media (max-width: 300px) {
+  .Pop_Up_Button {
+    width: 8rem;
+    height: 2.2rem;
+    font-size: 0.9rem;
+  }
 
-        .Pop_Up_Button {
-            width: 8rem;
-            height: 2.2rem;
-            font-size: 1rem;
-        }
-    }
-
-    /*-----------------------------------------*/
-
- 
+  h1 { font-size: 1.6rem; }
+  p, q { font-size: 1rem; }
+}
