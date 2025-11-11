@@ -66,25 +66,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
 //---------------------------------------------------------//
 
-document.addEventListener("DOMContentLoaded", function() {
-  const overlay = document.getElementById("captcha-overlay");
 
-  // Initialize your CAPTCHA (example for reCAPTCHA)
-  grecaptcha.render('captcha', {
-    'sitekey' : 'YOUR_SITE_KEY'
-  });
-
-  const submitBtn = document.getElementById("captcha-submit");
-  submitBtn.addEventListener("click", function() {
-    const response = grecaptcha.getResponse();
-    if(response.length === 0) {
-      alert("Please complete the CAPTCHA");
-    } else {
-      // CAPTCHA passed, hide overlay
-      overlay.style.display = "none";
-
-      // Optionally send response to your backend for verification
-      // fetch('/verify-captcha', { method: 'POST', body: JSON.stringify({response}) })
-    }
-  });
-});
