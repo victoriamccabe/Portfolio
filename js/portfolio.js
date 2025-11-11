@@ -41,3 +41,22 @@ function toggleForm() {
 
 //---------------------------------------------------------//
 
+
+// Bootstrap Carousel Initialization
+
+document.addEventListener("DOMContentLoaded", function() {
+  const myCarousel = document.querySelector('#carouselExampleCaptions');
+  const carousel = new bootstrap.Carousel(myCarousel, {
+    interval: 3000,
+    ride: 'carousel',
+    pause: false,
+    wrap: true,
+    touch: true
+  });
+
+  // Smoother fade transitions
+  const items = myCarousel.querySelectorAll('.carousel-item');
+  items.forEach(item => {
+    item.style.transition = 'opacity 1.2s ease-in-out';
+  });
+});

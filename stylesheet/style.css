@@ -89,17 +89,15 @@ a:hover {
 
 /* Optional: cursor pointer for clickable slides */
 .carousel-item {
-    cursor: pointer;
-
+    
+    cursor: pointer; /* shows pointer to indicate it's clickable */
 }
 
 /* Carousel images fit exactly 200x200 */
 .carrousel-img {
  max-height: 20rem;
  }
- .carousel-item {
-    cursor: pointer; /* shows pointer to indicate it's clickable */
-}
+
  /* Invert carousel controls for dark background */
 .carousel-control-next,
 .carousel-control-prev /*, .carousel-indicators */ {
