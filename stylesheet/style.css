@@ -156,7 +156,8 @@ a:hover {
  ****************************************************/
 
 .Drop_Text {
-  margin-top: 6.5rem !important;
+  margin-top: 10rem !important;
+  margin-bottom: 6rem !important;
   animation: fadeInText 1.5s ease forwards;
 }
 
