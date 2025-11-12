@@ -177,5 +177,5 @@ button.addEventListener('click', ()=>{
       leaves.push(new Leaf(false)); // add new leaf
       added++;
     }
-  }, .030); // spawn every 10ms
+  }, .05); // spawn every 10ms
 });

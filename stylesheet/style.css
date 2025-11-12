@@ -8,12 +8,23 @@
 
 /* CSS Variables (Theme Colors) */
 :root {
-    --color-primary: #3B3A43;
-    --color-secondary: #F7F0F7;
-    --color-accent: #D6C1BF;
-    --color-muted: #6B7670;
+    --color-primary: rgb(53, 56, 47);;
+    --color-transparent-primary: rgba(53, 56, 47, 0.8);
+    --color-secondary: #F8DCABff;
+    --color-accent: #A63526ff;
+    --color-muted: rgb(84, 80, 22);
     --color-shadow: rgba(0, 0, 0, 0.25);
+
+    /*Autum Palette*/
+    --peach-yellow: #F8DCABff;
+--spanish-orange: #E0690Aff;
+--dark-moss-green: rgb(84, 80, 22);
+--autumred: #A63526ff;
+--harvest-gold: #E4A60Eff;
+--kobicha: rgb(53, 56, 47);
 }
+
+
 
 /* Smooth scrolling across the document */
 html {
@@ -41,8 +52,9 @@ h1 {
     text-transform: uppercase;
     text-align: center;
     padding-top: 1rem;
-    color: var(--color-secondary);
+    color: var(--color-accent);
     font-size: 3rem;
+    font-weight: bolder;
     -webkit-text-stroke: 0.12rem var(--color-primary);
     letter-spacing: 0.125rem;
     transition: transform 0.5s ease;
@@ -85,7 +97,12 @@ q {
         -1px 1px 0 black, 1px 1px 0 black;
 }
 
-
+.home-card-text {
+    font-size: 1.3rem;
+    color: var(--color-secondary) !important;
+    text-align: center;
+    margin-top: 1rem;
+}
 
 
 
@@ -208,7 +225,7 @@ q {
  ****************************************************/
 
 .Content_Container {
-    background-color: rgba(89, 83, 90, 0.35);
+    background-color: var(--color-transparent-primary);
     margin: 0.5rem 1rem 1rem;
     border-radius: 1rem;
     padding: 2rem;
@@ -225,12 +242,10 @@ q {
     height: 31.9rem;
 }
 
-.Column_1 {
-    background-color: #baafb2;
-}
+
 
 .Column_2 {
-    background-color: rgba(89, 83, 90, 0.318);
+    background-color: var(--color-transparent-primary);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -252,6 +267,9 @@ q {
  ****************************************************/
 
 /* General card styling */
+
+
+
 .video-card,
 .fixed-card {
     max-width: 100%;
@@ -309,13 +327,13 @@ q {
 }
 
 .text {
-    color: white;
+    color: var(--color-secondary);
     padding: 0.3rem;
     position: absolute;
     bottom: 0;
     width: 100%;
     text-align: center;
-    background: rgba(59, 58, 67, 0.8);
+    background: var(--color-transparent-primary);
     border-radius: 0 0 7px 7px;
     font-size: 1.2rem;
     letter-spacing: 0.12rem;
@@ -326,7 +344,7 @@ q {
     height: 1.2rem;
     width: 1.2rem;
     margin: 0.3rem;
-    background-color: white;
+    background-color: var(--color-secondary);
     border-radius: 50%;
     display: inline-block;
     transition: background-color 0.6s ease;
@@ -334,7 +352,7 @@ q {
 
 .active,
 .dot:hover {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: var(--color-primary);
 }
 
 .fade {
@@ -352,13 +370,35 @@ q {
 }
 
 /****************************************************
+ ******************** BUTTONS ************************
+ ****************************************************/
+
+ .custom-button {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    border: none;
+    border-radius: 0.7rem;
+    box-shadow: 0 4px 10px var(--color-shadow);
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+   text-align: center;
+ }    
+
+.custom-button:hover {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+/****************************************************
  ******************** FOOTER ************************
  ****************************************************/
 
 footer {
     padding: 1%;
     background-color: var(--color-primary);
-    color: #BBC8CE;
+    color: var(--color-secondary);
     text-align: center;
 }
 
@@ -415,10 +455,11 @@ footer {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: var(--color-transparent-primary);
     z-index: 15;
     justify-content: center;
     align-items: center;
+    border-radius: 1rem;
 }
 
 /* Form popup container */
@@ -486,12 +527,12 @@ footer {
 }
 
 .form-container .cancel {
-    background-color: #999;
-    color: #fff;
+    background-color: var(--color-muted);
+    color: var(--color-secondary)
 }
 
 .form-container .cancel:hover {
-    background-color: #6b6b6b;
+    background-color: var(--color-accent);
 }
 
 /* Close button (X) */
@@ -680,8 +721,8 @@ footer {
 }
 
 .cta-button {
-    background-color: var(--color-primary);
-    color: var(--color-secondary);
+    background-color: var(--color-primary) !important;
+    color: var(--color-secondary) !important;
     max-width: 10rem;
     max-height: 2rem;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;

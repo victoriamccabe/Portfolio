@@ -57,7 +57,7 @@
 
     <!-- === CONTAINERS SECTION === -->
 
-<canvas id="particle-canvas"></canvas>
+    <canvas id="particle-canvas"></canvas>
 
     <!--DROP CARD -->
     <div class="card Drop_Text text-center py-5 bg-transparent border-0">
@@ -67,14 +67,14 @@
 
 
     <!-- === SECTION 1  === -->
-    <div class="Content_Container my-5">
+    <div class="Content_Container my-5 ">
 
 
         <!-- First Rowcard -->
-        <div class="row g-4">
+        <div class="row g-4 ">
             <!--SLIDESHOW-->
             <div class="col-md-6 fixed-card">
-                <div class="card  h-100 p-2 align-items-center bg-transparent border-0">
+                <div class="card  h-100 p-2 align-items-center bg-transparent border-0 ">
 
                     <div id="carouselExampleCaptions" class="carousel slide data-bs-interval='3000' carousel-fade"
                         data-bs-ride="carousel">
@@ -139,56 +139,77 @@
             </div>
 
             <!-- Card 2 -->
-            <div class="col-md-6 ">
+            <div class="col-md-6 align-items-center d-flex flex-column justify-content-center">
 
-                <div class="row">
-                    <div class="col-lg-6 col-md-8 mx-auto ">
-                        <h1 class="fw-light">About Me</h1>
-                        <p class="lead text-body-secondary">
-                            
-                            I’m a junior developer and proud graduate of The Tech Academy. I love turning ideas into
-                            apps and building projects that are both useful and fun. I update this website often, so
-                            don’t hesitate to take a look, share feedback, collaborate on my projects, or even get
-                            ideas
-                            for yours!
-                        </p>
-                        <p>
-                        
-                            <a href="#" class="btn btn-secondary my-2 ">Secondary action</a>
-                        </p>
-                    </div>
+
+                <div class="col-md-6 fixed-card">
+                    <h1>About Me</h1>
+                    <p class="lead text-body-secondary home-card-text">
+
+                        I’m a junior developer and proud graduate of The Tech Academy. I love turning ideas into
+                        apps and building projects that are both useful and fun. I update this website often, so
+                        don’t hesitate to take a look, share feedback, collaborate on my projects, or even get
+                        ideas
+                        for yours!
+                    </p>
+
+
+
                 </div>
-                <div class="cta-container"></div>
+                <a href="#" class="btn btn-secondary my-2 custom-button " id="cta-btn">PROJECTS</a>
+
 
             </div>
         </div>
+        <div class="cta-container"></div>
 
     </div>
-    <div class="row g-4">
-        <div class="col-md-6 fixed-card"></div>
-            <button class="btn btn-sm btn-outline-secondary cta-button" id="cta-btn">
-                <span class="cta-text">Do you want to see my projects?</span>
-            </button>
+
+
+
+    <!-- === CONTACT FORM === -->
+    <div id="Contact">
+        <!-- Contact Button (always visible) -->
+        <button onclick="event.stopPropagation(); toggleForm();" class="Pop_Up_Button">CONTACT</button>
+
+        <!-- Contact Form Popup -->
+        <div class="form-popup" id="myForm">
+            <!-- Close X button -->
+            <button type="button" class="close-x" onclick="closeForm()">&times;</button>
+            <div class="contact-overlay" id="contact-overlay">
+                <span class="coming-soon-text">COMING SOON<br>
+                    <p class="coming-soon-text coming-soon-email">Email: victoriamccabe96@gmail.com</p>
+                </span>
+            </div>
+            <form action="https://formspree.io/info@learncodinganywhere.com" method="POST" class="form-container">
+                <h1>Contact</h1>
+                <label for="name"><b>Name</b></label>
+                <input type="text" placeholder="Type your name here" name="name" required>
+                <label for="phone"><b>Phone</b></label>
+                <input type="text" placeholder="Type your phone number here" name="phone">
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Type your email address here" name="email" required>
+                <label for="message"><b>Message</b></label>
+                <input type="text" placeholder="Type your message here" name="message">
+                <button type="submit" class="btn">SUBMIT</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">CLOSE</button>
+            </form>
         </div>
-    </div>
-    
-
-    <!-- === Breathing Button === -->
 
 
 
-    <!-- === FOOTER === -->
-    <footer>
-        <p class="footer-text">
-            &copy; 2025 Victoria McCabe
+        <!-- === FOOTER === -->
+        <footer>
+            <p class="footer-text">
+                &copy; 2025 Victoria McCabe
 
-        </p>
-    </footer>
+            </p>
+        </footer>
 
-    <!-- === JAVASCRIPT === -->
-    <script src="js/portfolio.js"></script>
-    <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="https://js.prosopo.io/js/procaptcha.bundle.js" async defer></script>
+        <!-- === JAVASCRIPT === -->
+        <script src="js/portfolio.js"></script>
+        <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+        <script type="module" src="https://js.prosopo.io/js/procaptcha.bundle.js" async defer></script>
 
 </body>
 
