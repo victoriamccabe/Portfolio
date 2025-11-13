@@ -78,11 +78,11 @@ let active = false; // true when hovering over the button
 let storm = false;  // true when button is clicked (storm mode)
 
 // Preload leaf images into an array
-const leafImages = ['images/leaf1.png','images/leaf2.png','images/leaf3.png']
-  .map(src => { 
-    const img = new Image(); 
-    img.src = src; 
-    return img; 
+const leafImages = ['images/leaf1.png', 'images/leaf2.png', 'images/leaf3.png']
+  .map(src => {
+    const img = new Image();
+    img.src = src;
+    return img;
   });
 
 // Function to resize canvas to full window size
@@ -90,66 +90,78 @@ function resizeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 }
-
-// Keep canvas responsive on window resize
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas(); // initial sizing
 
+// Detect screen size and set behavior
+let leafCount, fallSpeedMultiplier;
+function setLeafBehavior() {
+  if (window.innerWidth <= 700) {
+    leafCount = 2000;             // fewer leaves
+    fallSpeedMultiplier = 5;   // faster fall
+  } 
+  if (window.innerWidth <= 300) {
+    leafCount = 200;             // fewer leaves
+    fallSpeedMultiplier = 5;   // faster fall
+  }
+  else {
+    leafCount = 300;             // normal amount
+    fallSpeedMultiplier = 1;     // normal speed
+  }
+}
+setLeafBehavior();
+window.addEventListener('resize', setLeafBehavior);
+
 // Leaf class defines properties and behavior of each leaf
 class Leaf {
-  constructor(topOnly=true){
-    // Random starting position
+  constructor(topOnly = true) {
     this.x = Math.random() * canvas.width;
-    this.y = topOnly ? Math.random() * -canvas.height : -20; // spawn above screen or just above top
+    this.y = topOnly ? Math.random() * -canvas.height : -20;
 
-    // Random size and movement
-    this.size = Math.random() * 30 + 20;       // leaf size between 20–50px
-    this.speedY = Math.random() * 2 + 1;       // falling speed
-    this.speedX = Math.random() * 1 - 0.5;     // horizontal drift
-    this.rotation = Math.random() * 2 * Math.PI; // initial rotation angle
-    this.rotationSpeed = Math.random() * 0.05 - 0.025; // spin speed
-    this.alpha = 0.8 + Math.random() * 1;    // transparency (0.5–1.0)
-    this.stopped = false;                      // whether leaf has landed
-    this.img = leafImages[Math.floor(Math.random()*leafImages.length)]; // random image
+    this.size = Math.random() * 30 + 20;
+    this.speedY = (Math.random() * 2 + 1) * fallSpeedMultiplier; // adjusted speed
+    this.speedX = Math.random() * 1 - 0.5;
+    this.rotation = Math.random() * 2 * Math.PI;
+    this.rotationSpeed = Math.random() * 0.05 - 0.025;
+    this.alpha = 0.8 + Math.random() * 1;
+    this.stopped = false;
+    this.img = leafImages[Math.floor(Math.random() * leafImages.length)];
   }
 
-  // Update leaf position and rotation
   update() {
-    if((active || storm) && !this.stopped){
-      this.y += this.speedY; // fall down
-      this.x += Math.sin(this.y/50) * this.speedX * 20; // horizontal sway
-      this.rotation += this.rotationSpeed; // spin
+    if ((active || storm) && !this.stopped) {
+      this.y += this.speedY;
+      this.x += Math.sin(this.y / 50) * this.speedX * 20;
+      this.rotation += this.rotationSpeed;
 
-      // Stop leaf when it hits the bottom
-      if(this.y + this.size/2 >= canvas.height){ 
-        this.y = canvas.height - this.size/2; 
-        this.stopped = true; 
+      if (this.y + this.size / 2 >= canvas.height) {
+        this.y = canvas.height - this.size / 2;
+        this.stopped = true;
       }
     }
   }
 
-  // Draw leaf on canvas
   draw() {
     ctx.save();
-    ctx.globalAlpha = this.alpha; // set transparency
-    ctx.translate(this.x,this.y); // move to leaf position
-    ctx.rotate(this.rotation);    // rotate leaf
-    ctx.drawImage(this.img, -this.size/2, -this.size/2, this.size, this.size); // draw centered
+    ctx.globalAlpha = this.alpha;
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.rotation);
+    ctx.drawImage(this.img, -this.size / 2, -this.size / 2, this.size, this.size);
     ctx.restore();
   }
 }
 
-// Create initial batch of leaves (300)
-for(let i=0;i<300;i++) leaves.push(new Leaf(true));
+// Create initial leaves
+for (let i = 0; i < leafCount; i++) leaves.push(new Leaf(true));
 
 // Animation loop
-function animate(){
-  ctx.clearRect(0,0,canvas.width,canvas.height); // clear canvas
-  leaves.forEach(leaf => { 
-    leaf.update(); 
-    leaf.draw(); 
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  leaves.forEach(leaf => {
+    leaf.update();
+    leaf.draw();
   });
-  requestAnimationFrame(animate); // repeat
+  requestAnimationFrame(animate);
 }
 animate();
 
@@ -157,22 +169,20 @@ animate();
 const button = document.getElementById('cta-btn');
 
 // Hover → leaves start falling
-button.addEventListener('mouseenter', ()=> active=true);
-;
+button.addEventListener('mouseenter', () => active = true);
 
 // Click → trigger storm and redirect
 button.addEventListener('click', (event) => {
-  event.preventDefault(); // stop default scroll/navigation
+  event.preventDefault();
 
   storm = true;
   active = true;
-  const totalStormLeaves = 800;
+  const totalStormLeaves = window.innerWidth <= 700 ? 300 : 800; // smaller storm on small screens
   let added = 0;
 
   const spawnInterval = setInterval(() => {
-    if (added >= totalStormLeaves) { 
+    if (added >= totalStormLeaves) {
       clearInterval(spawnInterval);
-      // Redirect without changing scroll position
       setTimeout(() => window.location.assign('projects.html'), 100);
     } else {
       leaves.push(new Leaf(false));
