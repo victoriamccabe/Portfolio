@@ -64,8 +64,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-//-------------------------Poerfolio button --------------------------------//
-
 // Get the canvas element and its 2D drawing context
 const canvas = document.getElementById('particle-canvas');
 const ctx = canvas.getContext('2d');
@@ -97,14 +95,9 @@ resizeCanvas(); // initial sizing
 let leafCount, fallSpeedMultiplier;
 function setLeafBehavior() {
   if (window.innerWidth <= 700) {
-    leafCount = 2000;             // fewer leaves
-    fallSpeedMultiplier = 5;   // faster fall
-  } 
-  if (window.innerWidth <= 300) {
-    leafCount = 200;             // fewer leaves
-    fallSpeedMultiplier = 5;   // faster fall
-  }
-  else {
+    leafCount = 120;             // fewer leaves
+    fallSpeedMultiplier = 1.8;   // faster fall
+  } else {
     leafCount = 300;             // normal amount
     fallSpeedMultiplier = 1;     // normal speed
   }
