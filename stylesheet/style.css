@@ -14,6 +14,8 @@
     --color-accent: #A63526ff;
     --color-muted: rgb(84, 80, 22);
     --color-shadow: rgba(0, 0, 0, 0.25);
+    --glass-white: rgba(255, 255, 255, 0.15);
+    --glass-black: rgba(0, 0, 0, 0.15);
 
     /*Autum Palette*/
     --peach-yellow: #F8DCABff;
@@ -59,15 +61,25 @@ h1 {
     letter-spacing: 0.125rem;
     transition: transform 0.5s ease;
 }
-
-h1:hover {
+h2 {
+    text-transform: uppercase;
+    text-align: center;
+    padding-top: 0.5rem;
+    color: var(--color-secondary);
+    font-size: 2.5rem;
+    font-weight: bolder;
+    -webkit-text-stroke: 0.1rem var(--color-primary);
+    letter-spacing: 0.1rem;
+    transition: transform 0.5s ease;
+}
+h1:hover,h2:hover {
     transform: scale(1.05);
 }
 
 p {
     font-size: 1.1rem;
     line-height: 1.6;
-    color: var(--color-primary);
+    color: var(--color-secondary);
     margin-bottom: 1rem;
     transition: transform 0.3s ease;
 }
@@ -225,7 +237,7 @@ q {
  ****************************************************/
 
 .Content_Container {
-    background-color: var(--color-transparent-primary);
+    background-color: var(--glass-black);
     margin: 0.5rem 1rem 1rem;
     border-radius: 1rem;
     padding: 2rem;
@@ -266,32 +278,81 @@ q {
  ******************** CARDS & CAROUSEL **************
  ****************************************************/
 
-/* General card styling */
+
+/*  CARD STYLING  */
 
 
-
-.video-card,
-.fixed-card {
-    max-width: 100%;
-    border-radius: 0.75rem;
+.project-card {
+  display: flex; /* Flex container to arrange content vertically */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: space-between; /* Push button to bottom */
+  height: 100%; /* Uniform card height */
+  border: none; 
+  border-radius: 1.5rem; 
+  
+  /* Frosted glass effect */
+  background-color: var(--glass-black);
+  backdrop-filter: blur(10px); /* Blur background behind card */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: all 0.3s ease; /* Smooth transition on hover */
 }
 
-.video-card {
-    max-height: 20rem;
+/* Hover effect for card */
+.project-card:hover {
+  transform: translateY(-5px); /* Slight lift */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Stronger shadow */
 }
 
-.fixed-card {
-    max-height: 30rem;
+
+/* VIDEO STYLING */
+
+.project-card video {
+  object-fit: cover; /* Fill container without distortion */
+  cursor: pointer; /* Pointer cursor */
+  width: 100%; /* Full width */
+  height: 225px; /* Fixed height */
+  border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+ 
 }
 
-.card-title {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: var(--color-primary);
-    font-weight: 700;
-    text-align: center;
+
+/* CARD BODY STYLING  */
+
+.project-card .card-body {
+  flex-grow: 1; /* Expand to fill card height */
+  text-transform: uppercase;
+  padding: 1rem 1.25rem; /* Inner spacing */
+  display: flex; 
+  flex-direction: column; /* Stack title, text, button */
+  text-align: center; 
 }
+
+/* Card title styling */
+.project-card .card-title {
+  font-weight: bolder;
+  font-size: 1.5rem;
+ letter-spacing: 0.1rem;
+  margin-bottom: 0.6rem; 
+  font-family: 'Afacad Flux';
+}
+
+/* Card text styling */
+.project-card .card-text {
+text-transform: none;
+  font-size: 1.2rem;
+  color: var(--color-secondary);
+  line-height: 1.4;
+}
+
+
+
+
+
 /* Carousel appearance */
+
+
 #carouselExampleCaptions {
     width: 100%;
     max-width: 500px;
@@ -390,6 +451,32 @@ q {
     background-color: var(--color-accent);
     color: var(--color-primary);
     transform: translateY(-2px);
+}
+
+
+/*Cards buttons*/
+
+.custom-button {
+  background-color:var(--color-primary); 
+  color: var(--color-secondary);
+  border-radius: 2rem; 
+  font-size: 0.95rem;
+  padding: 0.5rem 1.5rem;
+  border: none; /* Remove default border */
+  text-decoration: none; /* Remove underline */
+  transition: all 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect */
+.custom-button:hover {
+  background-color:var(--color-accent); /* Darker background on hover */
+  transform: scale(1.05); /* Slightly grow button */
+}
+
+/* Center the button if using text-center in card */
+.button-container {
+  text-align: center;
+  margin-top: 1rem; /* Space above button */
 }
 
 /****************************************************
@@ -620,7 +707,16 @@ position: fixed;   /* stays pinned to viewport */
     z-index: 30;      /* behind other elements */
 }
 
-
+#particle-canvas {
+  filter: 
+  drop-shadow(0 0 2px rgba(0,0,0,0.5)) 
+  brightness(1.1) 
+  hue-rotate(30deg) 
+  saturate(0.7) 
+  contrast(.9) 
+  blur(0.5px) 
+  sepia(0.01) ;
+}
 /****************************************************
  ******************** RESPONSIVE DESIGN *************
  ****************************************************/
@@ -707,7 +803,21 @@ position: fixed;   /* stays pinned to viewport */
         font-size: 1rem;
     }
 
+    .custom-button {
+    font-size: 0.9rem; /* Slightly smaller on smaller screens */
+    padding: 0.4rem 1.2rem; /* Adjust padding */
+  }
+  .project-card {
+    background-color: rgba(255, 255, 255, 0.25); /* Slightly stronger transparency on mobile */
+    backdrop-filter: blur(8px); /* Less blur for performance on mobile */
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .project-card .card-text {
+    font-size: 0.9rem; /* Adjust text size */
+  }
 }
+
 
 /* Hide collapse above 700px = expanded state */
 @media (min-width: 701px) {
