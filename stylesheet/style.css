@@ -587,8 +587,8 @@ footer {
  ******************** RESPONSIVE DESIGN *************
  ****************************************************/
 
-/* For screens ≤ 600px (phones) */
-@media (max-width: 600px) {
+/* For screens ≤ 700px (phones & tablets) */
+@media (max-width: 700px) {
 
     .Column_1,
     .Column_2 {
@@ -608,7 +608,7 @@ footer {
         max-width: 90%;
     }
 
-    .form-container {
+    .form-container, .cta-container {
         padding: 0.6rem;
     }
 
@@ -671,8 +671,8 @@ footer {
 
 }
 
-/* Hide collapse above 600px = expanded state */
-@media (min-width: 601px) {
+/* Hide collapse above 700px = expanded state */
+@media (min-width: 701px) {
     .navbar-expand-custom .navbar-collapse {
         display: flex !important;
         flex-basis: auto;
