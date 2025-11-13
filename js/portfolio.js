@@ -121,7 +121,7 @@ class Leaf {
     this.img = leafImages[Math.floor(Math.random() * leafImages.length)];
   }
 
-  update() {
+ update() {
     if ((active || storm) && !this.stopped) {
       this.y += this.speedY;
       this.x += Math.sin(this.y / 50) * this.speedX * 20;
@@ -143,7 +143,6 @@ class Leaf {
     ctx.restore();
   }
 }
-
 // Create initial leaves
 for (let i = 0; i < leafCount; i++) leaves.push(new Leaf(true));
 
