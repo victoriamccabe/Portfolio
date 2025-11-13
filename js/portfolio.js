@@ -161,21 +161,22 @@ button.addEventListener('mouseenter', ()=> active=true);
 ;
 
 // Click → trigger storm and redirect
-button.addEventListener('click', ()=>{
+button.addEventListener('click', (event) => {
+  event.preventDefault(); // stop default scroll/navigation
+
   storm = true;
   active = true;
-  const totalStormLeaves = 800; // number of extra leaves for storm
+  const totalStormLeaves = 800;
   let added = 0;
 
-  // Spawn leaves rapidly until storm is full
-  const spawnInterval = setInterval(()=>{
-    if(added >= totalStormLeaves){ 
+  const spawnInterval = setInterval(() => {
+    if (added >= totalStormLeaves) { 
       clearInterval(spawnInterval);
-      // After short delay, redirect to another page
-      setTimeout(()=> window.location.href='projects.html', 100); 
+      // Redirect without changing scroll position
+      setTimeout(() => window.location.assign('projects.html'), 100);
     } else {
-      leaves.push(new Leaf(false)); // add new leaf
+      leaves.push(new Leaf(false));
       added++;
     }
-  }, .05); // spawn every 10ms
+  }, 0.05);
 });

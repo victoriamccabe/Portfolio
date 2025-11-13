@@ -582,6 +582,43 @@ footer {
         transform: translateY(0);
     }
 }
+/****************************************************
+ ******************** PORTFOLIO BUTTON (JS) *************
+ ****************************************************/
+
+
+/* Button and text styles */
+.cta-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.cta-button {
+    background-color: var(--color-primary) !important;
+    color: var(--color-secondary) !important;
+    max-width: 10rem;
+    max-height: 2rem;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.cta-button:hover { animation: breathe 2s infinite; 
+    box-shadow: 0 0 10px rgba(39, 37, 38, 0.8); }
+@keyframes breathe { 0%,100% {transform: scale(1);} 50% {transform: scale(1.05);} }
+
+
+canvas { 
+position: fixed;   /* stays pinned to viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;    /* removes inline gaps */
+  pointer-events: none; /* lets clicks pass through */
+    z-index: 30;      /* behind other elements */
+}
+
 
 /****************************************************
  ******************** RESPONSIVE DESIGN *************
@@ -705,41 +742,4 @@ footer {
     }
 }
 
-
-/****************************************************
- ******************** PORTFOLIO BUTTON (JS) *************
- ****************************************************/
-
-
-/* Button and text styles */
-.cta-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-}
-
-.cta-button {
-    background-color: var(--color-primary) !important;
-    color: var(--color-secondary) !important;
-    max-width: 10rem;
-    max-height: 2rem;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-.cta-button:hover { animation: breathe 2s infinite; 
-    box-shadow: 0 0 10px rgba(39, 37, 38, 0.8); }
-@keyframes breathe { 0%,100% {transform: scale(1);} 50% {transform: scale(1.05);} }
-
-
-canvas { 
-position: fixed;   /* stays pinned to viewport */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: block;    /* removes inline gaps */
-  pointer-events: none; /* lets clicks pass through */
-
-}
 
