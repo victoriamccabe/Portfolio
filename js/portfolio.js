@@ -63,122 +63,199 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+/****************************************************
+ * CANVAS SETUP
+ ****************************************************/
+const canvas = document.getElementById("particle-canvas");
+const ctx = canvas.getContext("2d", { alpha: true });
 
-// Get the canvas element and its 2D drawing context
-const canvas = document.getElementById('particle-canvas');
-const ctx = canvas.getContext('2d');
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resizeCanvas, { passive: true });
+resizeCanvas();
 
-// Array to store all leaf objects
+/****************************************************
+ * GLOBAL STATES
+ ****************************************************/
 let leaves = [];
+let active = false;      // soft rain mode
+let windActive = false;  // bounce wind mode
 
-// Flags to control animation states
-let active = false; // true when hovering over the button
-let storm = false;  // true when button is clicked (storm mode)
+/****************************************************
+ * PERFORMANCE SETTINGS
+ ****************************************************/
+let leafCount, fallSpeedMult;
+function setPerformance() {
+    const small = window.innerWidth <= 700;
+    leafCount = small ? 40 : 150;
+    fallSpeedMult = small ? 1.7 : 1.0;
+}
+setPerformance();
+window.addEventListener("resize", setPerformance, { passive: true });
 
-// Preload leaf images into an array
-const leafImages = ['images/leaf1.png', 'images/leaf2.png', 'images/leaf3.png']
-  .map(src => {
+/****************************************************
+ * PRELOAD LEAF IMAGES
+ ****************************************************/
+const leafImages = ["images/leaf1.png", "images/leaf2.png", "images/leaf3.png"].map((src) => {
     const img = new Image();
     img.src = src;
     return img;
-  });
+});
 
-// Function to resize canvas to full window size
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas(); // initial sizing
-
-// Detect screen size and set behavior
-let leafCount, fallSpeedMultiplier;
-function setLeafBehavior() {
-  if (window.innerWidth <= 700) {
-    leafCount = 120;             // fewer leaves
-    fallSpeedMultiplier = 1.8;   // faster fall
-  } else {
-    leafCount = 300;             // normal amount
-    fallSpeedMultiplier = 1;     // normal speed
-  }
-}
-setLeafBehavior();
-window.addEventListener('resize', setLeafBehavior);
-
-// Leaf class defines properties and behavior of each leaf
+/****************************************************
+ * LEAF CLASS
+ ****************************************************/
 class Leaf {
-  constructor(topOnly = true) {
-    this.x = Math.random() * canvas.width;
-    this.y = topOnly ? Math.random() * -canvas.height : -20;
+    constructor(topOnly = true) {
+        this.x = Math.random() * window.innerWidth;
+        this.y = topOnly ? Math.random() * -window.innerHeight : -20;
 
-    this.size = Math.random() * 30 + 20;
-    this.speedY = (Math.random() * 2 + 1) * fallSpeedMultiplier; // adjusted speed
-    this.speedX = Math.random() * 1 - 0.5;
-    this.rotation = Math.random() * 2 * Math.PI;
-    this.rotationSpeed = Math.random() * 0.05 - 0.025;
-    this.alpha = 0.8 + Math.random() * 1;
-    this.stopped = false;
-    this.img = leafImages[Math.floor(Math.random() * leafImages.length)];
-  }
+        this.size = Math.random() * 25 + 20;
+        this.speedY = (Math.random() * 2 + 1) * fallSpeedMult;
+        this.speedX = Math.random() * 1 - 0.5;
 
- update() {
-    if ((active || storm) && !this.stopped) {
-      this.y += this.speedY;
-      this.x += Math.sin(this.y / 50) * this.speedX * 20;
-      this.rotation += this.rotationSpeed;
+        // WIND VELOCITIES (0 until wind starts)
+        this.vx = 0;
+        this.vy = 0;
 
-      if (this.y + this.size / 2 >= canvas.height) {
-        this.y = canvas.height - this.size / 2;
-        this.stopped = true;
-      }
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotationSpeed = Math.random() * 0.05 - 0.025;
+
+        this.stopped = false;
+        this.img = leafImages[(Math.random() * leafImages.length) | 0];
     }
-  }
 
-  draw() {
-    ctx.save();
-    ctx.globalAlpha = this.alpha;
-    ctx.translate(this.x, this.y);
-    ctx.rotate(this.rotation);
-    ctx.drawImage(this.img, -this.size / 2, -this.size / 2, this.size, this.size);
-    ctx.restore();
-  }
+    update() {
+        /****************************************
+         * NORMAL SOFT RAIN
+         ****************************************/
+        if (!windActive) {
+            if (active && !this.stopped) {
+                this.y += this.speedY;
+                this.x += Math.sin(this.y * 0.02) * 1.2;
+                this.rotation += this.rotationSpeed;
+
+                if (this.y >= canvas.height - this.size) {
+                    this.y = canvas.height - this.size;
+                    this.stopped = true;
+                }
+            }
+            return;
+        }
+
+        /****************************************
+         * BOUNCING WIND MODE
+         ****************************************/
+
+        // Leaves stuck on bottom → give velocity when wind starts
+        if (this.stopped) {
+            this.stopped = false;
+            this.vx = (Math.random() * 6 + 4);  // strong push to right
+            this.vy = -(Math.random() * 6 + 2); // lift upward
+        }
+
+        // If wind just activated, give initial velocities
+        if (this.vx === 0 && this.vy === 0) {
+            this.vx = 6 + Math.random() * 3;          // horizontal push
+            this.vy = -2 + Math.random() * 4;         // slight up/down turbulence
+        }
+
+        // Apply velocity
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Add rotation speed during wind
+        this.rotation += 0.25;
+
+        /****************************************
+         * SCREEN BOUNCING
+         ****************************************/
+
+        // Left wall
+        if (this.x < 0) {
+            this.x = 0;
+            this.vx *= -1;       // bounce
+            this.vx += Math.random() * 1.2; // add chaos
+        }
+
+        // Right wall
+        if (this.x > canvas.width - this.size) {
+            this.x = canvas.width - this.size;
+            this.vx *= -1;
+            this.vx -= Math.random() * 1.2;
+        }
+
+        // Top wall
+        if (this.y < 0) {
+            this.y = 0;
+            this.vy *= -1;
+        }
+
+        // Bottom wall
+        if (this.y > canvas.height - this.size) {
+            this.y = canvas.height - this.size;
+            this.vy *= -1;
+            this.vy -= Math.random() * 0.5; // slight lift
+        }
+    }
+
+    draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+        ctx.drawImage(this.img, -this.size / 2, -this.size / 2, this.size, this.size);
+        ctx.restore();
+    }
 }
-// Create initial leaves
-for (let i = 0; i < leafCount; i++) leaves.push(new Leaf(true));
 
-// Animation loop
+/****************************************************
+ * INITIAL LEAVES
+ ****************************************************/
+for (let i = 0; i < leafCount; i++) {
+    leaves.push(new Leaf(true));
+}
+
+/****************************************************
+ * ANIMATION LOOP
+ ****************************************************/
 function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  leaves.forEach(leaf => {
-    leaf.update();
-    leaf.draw();
-  });
-  requestAnimationFrame(animate);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (let leaf of leaves) {
+        leaf.update();
+        leaf.draw();
+    }
+
+    requestAnimationFrame(animate);
 }
 animate();
 
-// Button interactions
-const button = document.getElementById('cta-btn');
+/****************************************************
+ * INTERACTION ELEMENTS
+ ****************************************************/
+const hoverArea = document.getElementById("hover-area");
+const stormBtn = document.getElementById("storm-btn");
 
-// Hover → leaves start falling
-button.addEventListener('mouseenter', () => active = true);
+/****************************************
+ * SOFT RAIN (starts once, stays on)
+ ****************************************/
+hoverArea.addEventListener("mouseenter", () => {
+    active = true;
+});
 
-// Click → trigger storm and redirect
-button.addEventListener('click', (event) => {
-  event.preventDefault();
+/****************************************
+ * BOUNCING WIND + REDIRECT
+ ****************************************/
+stormBtn.addEventListener("click", (event) => {
+    event.preventDefault();
 
-  storm = true;
-  active = true;
-  const totalStormLeaves = window.innerWidth <= 700 ? 300 : 800; // smaller storm on small screens
-  let added = 0;
+    active = true;     // leaves start falling if not already
+    windActive = true; // activate bouncing wind
 
-  const spawnInterval = setInterval(() => {
-    if (added >= totalStormLeaves) {
-      clearInterval(spawnInterval);
-      setTimeout(() => window.location.assign('projects.html'), 100);
-    } else {
-      leaves.push(new Leaf(false));
-      added++;
-    }
-  }, 0.05);
+    // redirect after 2 seconds of chaos
+    setTimeout(() => {
+        window.location.assign("projects.html");
+    }, 2000);
 });
