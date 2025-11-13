@@ -81,7 +81,7 @@ resizeCanvas();
  ****************************************************/
 let leaves = [];
 let active = false;      // soft rain mode
-let windActive = false;  // bounce wind mode
+let windActive = false;  // bouncing wind mode
 
 /****************************************************
  * PERFORMANCE SETTINGS
@@ -98,7 +98,7 @@ window.addEventListener("resize", setPerformance, { passive: true });
 /****************************************************
  * PRELOAD LEAF IMAGES
  ****************************************************/
-const leafImages = ["images/leaf1.png", "images/leaf2.png", "images/leaf3.png"].map((src) => {
+const leafImages = ["images/leaf1.png", "images/leaf2.png", "images/leaf3.png"].map(src => {
     const img = new Image();
     img.src = src;
     return img;
@@ -116,7 +116,7 @@ class Leaf {
         this.speedY = (Math.random() * 2 + 1) * fallSpeedMult;
         this.speedX = Math.random() * 1 - 0.5;
 
-        // WIND VELOCITIES (0 until wind starts)
+        // Wind velocities (used only in wind mode)
         this.vx = 0;
         this.vy = 0;
 
@@ -127,15 +127,15 @@ class Leaf {
         this.img = leafImages[(Math.random() * leafImages.length) | 0];
     }
 
-    update() {
+    update(delta) {
         /****************************************
-         * NORMAL SOFT RAIN
+         * SOFT RAIN
          ****************************************/
         if (!windActive) {
             if (active && !this.stopped) {
-                this.y += this.speedY;
-                this.x += Math.sin(this.y * 0.02) * 1.2;
-                this.rotation += this.rotationSpeed;
+                this.y += this.speedY * delta;
+                this.x += Math.sin(this.y * 0.02) * 1.5 * delta;
+                this.rotation += this.rotationSpeed * delta;
 
                 if (this.y >= canvas.height - this.size) {
                     this.y = canvas.height - this.size;
@@ -146,59 +146,32 @@ class Leaf {
         }
 
         /****************************************
-         * BOUNCING WIND MODE
+         * BOUNCING WIND
          ****************************************/
-
-        // Leaves stuck on bottom → give velocity when wind starts
+        // Unstick leaves
         if (this.stopped) {
             this.stopped = false;
-            this.vx = (Math.random() * 6 + 4);  // strong push to right
-            this.vy = -(Math.random() * 6 + 2); // lift upward
+            this.vx = (Math.random() * 6 + 4);
+            this.vy = -(Math.random() * 6 + 2);
         }
 
-        // If wind just activated, give initial velocities
+        // Give velocity if not initialized
         if (this.vx === 0 && this.vy === 0) {
-            this.vx = 6 + Math.random() * 3;          // horizontal push
-            this.vy = -2 + Math.random() * 4;         // slight up/down turbulence
+            this.vx = 6 + Math.random() * 3;
+            this.vy = -2 + Math.random() * 4;
         }
 
         // Apply velocity
-        this.x += this.vx;
-        this.y += this.vy;
+        this.x += this.vx * delta;
+        this.y += this.vy * delta;
+        this.rotation += 0.25 * delta;
 
-        // Add rotation speed during wind
-        this.rotation += 0.25;
+        // Bounce off edges
+        if (this.x < 0) { this.x = 0; this.vx *= -1; }
+        if (this.x > canvas.width - this.size) { this.x = canvas.width - this.size; this.vx *= -1; }
 
-        /****************************************
-         * SCREEN BOUNCING
-         ****************************************/
-
-        // Left wall
-        if (this.x < 0) {
-            this.x = 0;
-            this.vx *= -1;       // bounce
-            this.vx += Math.random() * 1.2; // add chaos
-        }
-
-        // Right wall
-        if (this.x > canvas.width - this.size) {
-            this.x = canvas.width - this.size;
-            this.vx *= -1;
-            this.vx -= Math.random() * 1.2;
-        }
-
-        // Top wall
-        if (this.y < 0) {
-            this.y = 0;
-            this.vy *= -1;
-        }
-
-        // Bottom wall
-        if (this.y > canvas.height - this.size) {
-            this.y = canvas.height - this.size;
-            this.vy *= -1;
-            this.vy -= Math.random() * 0.5; // slight lift
-        }
+        if (this.y < 0) { this.y = 0; this.vy *= -1; }
+        if (this.y > canvas.height - this.size) { this.y = canvas.height - this.size; this.vy *= -1; }
     }
 
     draw() {
@@ -218,22 +191,26 @@ for (let i = 0; i < leafCount; i++) {
 }
 
 /****************************************************
- * ANIMATION LOOP
+ * ANIMATION LOOP (DELTA TIME BASED)
  ****************************************************/
-function animate() {
+let lastTime = performance.now();
+function animate(now) {
+    const delta = (now - lastTime) / 16.666; // normalize to 60 FPS
+    lastTime = now;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     for (let leaf of leaves) {
-        leaf.update();
+        leaf.update(delta);
         leaf.draw();
     }
 
     requestAnimationFrame(animate);
 }
-animate();
+requestAnimationFrame(animate);
 
 /****************************************************
- * INTERACTION ELEMENTS
+ * INTERACTIONS
  ****************************************************/
 const hoverArea = document.getElementById("hover-area");
 const stormBtn = document.getElementById("storm-btn");
@@ -251,10 +228,10 @@ hoverArea.addEventListener("mouseenter", () => {
 stormBtn.addEventListener("click", (event) => {
     event.preventDefault();
 
-    active = true;     // leaves start falling if not already
-    windActive = true; // activate bouncing wind
+    active = true;      // leaves start falling if not already
+    windActive = true;  // activate bouncing wind
 
-    // redirect after 2 seconds of chaos
+    // redirect after 2 seconds of chaotic wind
     setTimeout(() => {
         window.location.assign("projects.html");
     }, 2000);
