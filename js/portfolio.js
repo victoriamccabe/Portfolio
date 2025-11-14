@@ -42,23 +42,42 @@ function toggleForm() {
 //---------------------------------------------------------//
 
 
-// Bootstrap Carousel Initialization
+/****************************************************
+ * CARROUSEL
+ ****************************************************/
 
 document.addEventListener("DOMContentLoaded", function() {
+  // Select the carousel element
   const myCarousel = document.querySelector('#carouselExampleCaptions');
+
+  // Initialize Bootstrap Carousel with custom options
   const carousel = new bootstrap.Carousel(myCarousel, {
-    interval: 3000,
-    ride: 'carousel',
-    pause: false,
-    wrap: true,
-    touch: true
+    interval: 3000,   // Time between slides in milliseconds
+    ride: 'carousel', // Start cycling automatically
+    pause: false,     // Do not pause on hover
+    wrap: true,       // Loop back to first slide
+    touch: true       // Enable swipe on touch devices
   });
 
-  // Smoother fade transitions
+  // Select all carousel items (slides)
   const items = myCarousel.querySelectorAll('.carousel-item');
+
+  // Apply smooth opacity and scale transitions to all slides
   items.forEach(item => {
-    item.style.transition = 'opacity 1.2s ease-in-out';
+    item.style.transition = 'opacity 1.2s ease-in-out, transform 1.2s ease-in-out';
   });
+
+  // Animate scale on slide change for a subtle zoom effect
+  myCarousel.addEventListener('slide.bs.carousel', (e) => {
+    // Shrink all slides slightly
+    items.forEach(item => item.style.transform = 'scale(0.95)');
+    // Zoom in the slide that is about to become active
+    e.relatedTarget.style.transform = 'scale(1)';
+  });
+
+  // Initialize the first slide scale to 1 (normal size)
+  const activeItem = myCarousel.querySelector('.carousel-item.active');
+  if (activeItem) activeItem.style.transform = 'scale(1)';
 });
 
 
