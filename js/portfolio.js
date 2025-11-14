@@ -86,54 +86,51 @@ document.addEventListener("DOMContentLoaded", function() {
  * CANVAS SETUP
  ****************************************************/
 // Get canvas and context
-const canvas = document.getElementById('particle-canvas');
-const ctx = canvas.getContext('2d');
-
-// Leaf array
-let leaves = [];
-
-// Flags
-let active = true;  // leaves fall automatically
-let storm = false;
-
-// Preload leaf images
-const leafImages = ['images/leaf1.png','images/leaf2.png','images/leaf3.png']
-  .map(src => {
-    const img = new Image();
-    img.src = src;
-    return img;
-  });
+const canvas = document.getElementById("particle-canvas");
+const ctx = canvas.getContext("2d", { alpha: true });
 
 // Resize canvas
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
-window.addEventListener('resize', resizeCanvas);
+window.addEventListener("resize", resizeCanvas, { passive: true });
 resizeCanvas();
 
-// Leaf behavior based on screen
-let leafCount, fallSpeedMultiplier;
-function setLeafBehavior() {
+// ------------------ GLOBAL STATES ------------------
+let leaves = [];
+let active = true;      // soft rain starts automatically
+let windActive = false; // storm/wind mode
+
+// ------------------ PERFORMANCE SETTINGS ------------------
+let leafCount, fallSpeedMult;
+function setPerformance() {
     const width = window.innerWidth;
-    if (width <= 500) {          // small phone
-        leafCount = 40;
-        fallSpeedMultiplier = 2.2;
-    } else if (width <= 768) {   // tablet
-        leafCount = 80;
-        fallSpeedMultiplier = 1.8;
-    } else if (width <= 1200) {  // average PC
-        leafCount = 150;
-        fallSpeedMultiplier = 1.2;
-    } else {                     // large screens
+    if (width <= 500) {          
+        leafCount = 30;
+        fallSpeedMult = 1.8;
+    } else if (width <= 768) {   
+        leafCount = 70;
+        fallSpeedMult = 1.5;
+    } else if (width <= 1200) {  
+        leafCount = 120;
+        fallSpeedMult = 1.2;
+    } else {                     
         leafCount = 200;
-        fallSpeedMultiplier = 1;
+        fallSpeedMult = 1.0;
     }
 }
-setLeafBehavior();
-window.addEventListener('resize', setLeafBehavior);
+setPerformance();
+window.addEventListener("resize", setPerformance, { passive: true });
 
-// Leaf class
+// ------------------ PRELOAD LEAF IMAGES ------------------
+const leafImages = ["images/leaf1.png","images/leaf2.png","images/leaf3.png"].map(src => {
+    const img = new Image();
+    img.src = src;
+    return img;
+});
+
+// ------------------ LEAF CLASS ------------------
 class Leaf {
     constructor(topOnly = true) {
         this.reset(topOnly);
@@ -142,71 +139,113 @@ class Leaf {
     reset(topOnly = false) {
         this.x = Math.random() * canvas.width;
         this.y = topOnly ? Math.random() * -canvas.height : -20;
-        this.size = Math.random() * 25 + 15;
-        this.speedY = (Math.random() * 1.5 + 0.5) * fallSpeedMultiplier;
+        this.size = Math.random() * 20 + 15; // size variation
+        this.speedY = (Math.random() * 1.5 + 0.5) * fallSpeedMult;
         this.speedX = Math.random() * 0.6 - 0.3;
+
+        // wind velocities
+        this.vx = 0;
+        this.vy = 0;
+
+        // rotation
         this.rotation = Math.random() * 2 * Math.PI;
-        this.rotationSpeed = Math.random() * 0.04 - 0.02;
-        this.alpha = 0.7 + Math.random() * 0.3;
+        this.rotationSpeed = (Math.random() * 0.04 - 0.02) * (Math.random() < 0.5 ? 1 : -1); // vary direction
+
+        // sway amplitude for natural drifting
+        this.swayAmplitude = Math.random() * 1.5 + 0.5;
+        this.swayFrequency = Math.random() * 0.02 + 0.01;
+
+        this.alpha = 0.6 + Math.random() * 0.4; // depth effect
+        this.stopped = false;
         this.img = leafImages[Math.floor(Math.random() * leafImages.length)];
     }
 
-    update() {
-        if (active || storm) {
-            this.y += this.speedY;
-            this.x += Math.sin(this.y / 50) * this.speedX * 20;
-            this.rotation += this.rotationSpeed;
+    update(delta) {
+        // --------- SOFT RAIN ---------
+        if (!windActive) {
+            this.y += this.speedY * delta;
+            this.x += Math.sin(this.y * this.swayFrequency) * this.swayAmplitude * delta;
+            this.rotation += this.rotationSpeed * delta;
 
-            // Wrap around screen to recycle leaves
-            if (this.y > canvas.height + this.size) this.reset();
-            if (this.x < -this.size) this.x = canvas.width + this.size;
-            if (this.x > canvas.width + this.size) this.x = -this.size;
+            if (this.y > canvas.height) {
+                this.y = -this.size;
+                this.x = Math.random() * canvas.width;
+            }
+            return;
         }
+
+        // --------- BOUNCING WIND ---------
+        if (this.stopped) {
+            this.stopped = false;
+            this.vx = (Math.random() * 6 + 4) * (Math.random() < 0.5 ? 1 : -1);
+            this.vy = -(Math.random() * 6 + 2);
+        }
+
+        if (this.vx === 0 && this.vy === 0) {
+            this.vx = 4 + Math.random() * 3;
+            this.vy = -2 + Math.random() * 4;
+        }
+
+        this.x += this.vx * delta;
+        this.y += this.vy * delta;
+        this.rotation += this.rotationSpeed * delta * 2;
+
+        // bounce off edges
+        if (this.x < 0) { this.x = 0; this.vx *= -1; }
+        if (this.x > canvas.width - this.size) { this.x = canvas.width - this.size; this.vx *= -1; }
+        if (this.y < 0) { this.y = 0; this.vy *= -1; }
+        if (this.y > canvas.height - this.size) { this.y = canvas.height - this.size; this.vy *= -1; }
     }
 
     draw() {
         ctx.save();
-        ctx.globalAlpha = this.alpha;
         ctx.translate(this.x, this.y);
         ctx.rotate(this.rotation);
-        ctx.drawImage(this.img, -this.size/2, -this.size/2, this.size, this.size);
+        ctx.globalAlpha = this.alpha;
+        ctx.drawImage(this.img, -this.size / 2, -this.size / 2, this.size, this.size);
         ctx.restore();
     }
 }
 
-// Initialize leaves
-for (let i = 0; i < leafCount; i++) leaves.push(new Leaf(true));
+// ------------------ INITIAL LEAVES ------------------
+for (let i = 0; i < leafCount; i++) {
+    leaves.push(new Leaf(true));
+}
 
-// Animation loop with FPS cap for slow devices
-let lastTime = 0;
-function animate(time) {
+// ------------------ ANIMATION LOOP ------------------
+let lastTime = performance.now();
+function animate(now) {
     requestAnimationFrame(animate);
-    const delta = time - lastTime;
-    if (delta < 16) return; // ~60 FPS cap
-    lastTime = time;
 
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    leaves.forEach(leaf => {
-        leaf.update();
+    let delta = (now - lastTime) / 16.666;
+    delta = Math.min(delta, 2); // clamp for slow frames
+    lastTime = now;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (let leaf of leaves) {
+        leaf.update(delta);
         leaf.draw();
-    });
+    }
 }
 requestAnimationFrame(animate);
 
-// Storm button
-const stormBtn = document.getElementById('storm-btn');
-stormBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    storm = true;
-    active = true;
+// ------------------ INTERACTIONS ------------------
+const stormBtn = document.getElementById("storm-btn");
 
-    const extraLeaves = window.innerWidth <= 700 ? 150 : 400;
-    for (let i = 0; i < extraLeaves; i++) {
-        leaves.push(new Leaf(false));
-    }
+// Storm triggers bouncing wind + extra leaves
+document.querySelectorAll(".storm-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        windActive = true;
 
-    setTimeout(() => {
-        window.location.assign('projects.html');
-    }, 1200); // small delay to let storm start
+        const extraLeaves = window.innerWidth <= 700 ? 50 : 100;
+        for (let i = 0; i < extraLeaves; i++) {
+            leaves.push(new Leaf(false));
+        }
+
+        setTimeout(() => {
+            window.location.assign("projects.html");
+        }, 3000);
+    });
 });
-
