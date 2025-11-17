@@ -509,15 +509,14 @@ text-transform: none;
  ******************** FOOTER ************************
  ****************************************************/
 
-footer {
+.footer-override {
     padding: 1%;
-    background-color: var(--color-primary);
-    color: var(--color-secondary);
-    text-align: center;
+    background-color: var(--color-primary)!important;
 }
 
 .footer-text {
-    font-size: 1.2rem;
+    color: var(--color-secondary)!important;
+    font-size: 2rem;
 }
 
 /****************************************************
